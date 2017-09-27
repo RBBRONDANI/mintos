@@ -2,51 +2,41 @@
 import sys
 import time
 import json
-#from cwm import CWM
 from mi import MI
 
-H = '/home/malf/mintos/' # home dir
-#NUMTDR = H + 'dat' + OS + 'numtdr.dat' # status file
-#require_once('WMSigner.php');
-#include ('k'.OS.'signdef.php');
-#include('cwm.php');
-#include('loandef.php');
-#include('errdesc.php');
-#include('/home/srv30502/htdocs/trk/sms/smstraffic/sms.php');
+H = './' # home dir
 
 class Runner(MI):
     def __init__(self, h):
         super().__init__()
         self.h = h
-        self.varset = {"status": {"file": "dat/numtdr.dat", "var": ""}}
-        self.var_load("status")
+        self.data = {"status": {"file": "dat/numtdr.dat", "value": ""}}
+        self.data_load("status")
         self.lock()
-    def sync(self, varname):
-        j = json.dumps(self.varset[varname]["var"], sort_keys=True, indent=4)#separators=(',',':')
-        open(self.h + self.varset[varname]["file"], 'w').write(j)
-    def var_load(self, varname):
-        self.varset[varname]["var"] = json.loads(open(self.h + self.varset[varname]["file"]).read())
+    def data_sync(self, varname):
+        j = json.dumps(self.data[varname]["value"], sort_keys=True, indent=4)#separators=(',',':')
+        open(self.h + self.data[varname]["file"], 'w').write(j)
+    def data_load(self, varname):
+        self.data[varname]["value"] = json.loads(open(self.h + self.data[varname]["file"]).read())
     def lock(self):
-        if self.varset["status"]["var"][2] == 1:
+        if self.data["status"]["value"][2] == 1:
             self.ts_exit("System is locked")
         else:
-            self.varset["status"]["var"][2] = 1
-            self.sync("status")
+            self.data["status"]["value"][2] = 1
+            self.data_sync("status")
     def ulock(self):
-        self.varset["status"]["var"][2] = 0
-        self.sync("status")
+        self.data["status"]["value"][2] = 0
+        self.data_sync("status")
 
 class Mintos(Runner):
     def __init__(self, h):
         super().__init__(h)
-#        self.varset["portfolio"] = {"file": "dat/port/port000000.dat", "var": ""}
-#        self.var_load("portfolio")
+        self.numlist = {}
 
 m = Mintos(H)
 try:
     print('Main part\n')
-#    m.varset["portfolio"]["var"] = json.loads(p.getPortfolio('0'))
-#    m.sync("portfolio")
+    m.numlist = m.getNewLoans()
 #    time.sleep(5)
 #    open('testfile')
 finally:
