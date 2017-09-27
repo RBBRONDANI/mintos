@@ -3,6 +3,7 @@ import sys
 import time
 import json
 from mi import MI
+from pdb import set_trace as bp
 
 H = './' # home dir
 
@@ -35,10 +36,11 @@ class Mintos(Runner):
 
 m = Mintos(H)
 try:
-    print('Main part\n')
+    print("Main part\n")
     m.numlist = m.getNewLoans()
+    bp()
+#    open("out.txt", 'w').write(m.numlist)
 #    time.sleep(5)
-#    open('testfile')
 finally:
     m.ulock()
 """
