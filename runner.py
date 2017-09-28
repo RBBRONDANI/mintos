@@ -2,7 +2,7 @@
 import sys
 import time
 import json
-from mi import MI
+from mintos import MI
 from pdb import set_trace as bp
 
 H = './' # home dir
