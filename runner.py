@@ -2,6 +2,7 @@
 import sys
 import time
 import json
+import codecs
 from mintos import MI
 from pdb import set_trace as bp
 
@@ -39,8 +40,8 @@ try:
     print("Main part\n")
     m.numlist = m.getNewLoans()
 #    bp()
-    open("dump.dat", 'w').write(m.numlist)
-#    time.sleep(5)
+    #open("./tmp/dump.dat", 'w').write(m.numlist)
+    print(m.numlist)
 finally:
     m.ulock()
 """

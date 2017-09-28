@@ -3,6 +3,7 @@ sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 sudo yum -y install python36u
 sudo yum -y install python36u-pip
 sudo pip3.6 install requests bs4
+https://sites.google.com/a/chromium.org/chromedriver/home
 # environment variables
 export MINTOS_USER=mintosuser
 export MINTOS_PASS=secret
