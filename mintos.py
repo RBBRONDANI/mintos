@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python3.6
 import sys
 import time
 import json
