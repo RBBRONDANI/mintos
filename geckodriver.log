@@ -1,0 +1,36 @@
+1506606384827	geckodriver	INFO	geckodriver 0.19.0
+1506606384830	geckodriver	INFO	Listening on 127.0.0.1:36676
+1506612397244	geckodriver	INFO	geckodriver 0.19.0
+1506612397247	geckodriver	INFO	Listening on 127.0.0.1:56984
+1506613178071	geckodriver	INFO	geckodriver 0.19.0
+1506613178074	geckodriver	INFO	Listening on 127.0.0.1:54379
+1506613635974	geckodriver	INFO	geckodriver 0.19.0
+1506613635977	geckodriver	INFO	Listening on 127.0.0.1:58946
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.
+1506613705740	geckodriver	INFO	geckodriver 0.19.0
+1506613705743	geckodriver	INFO	Listening on 127.0.0.1:58536
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.
+1506614177473	geckodriver	INFO	geckodriver 0.19.0
+1506614177477	geckodriver	INFO	Listening on 127.0.0.1:45209
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.
+1506614317615	geckodriver	INFO	geckodriver 0.19.0
+1506614317618	geckodriver	INFO	Listening on 127.0.0.1:43360
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.
+1506614523234	geckodriver	INFO	geckodriver 0.19.0
+1506614523238	geckodriver	INFO	Listening on 127.0.0.1:48577
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.
+1506614645768	geckodriver	INFO	geckodriver 0.19.0
+1506614645773	geckodriver	INFO	Listening on 127.0.0.1:44833
+XPCOMGlueLoad error for file /usr/lib64/firefox/libxul.so:
+/lib64/libnss3.so: version `NSS_3.30' not found (required by /usr/lib64/firefox/libxul.so)
+Couldn't load XPCOM.

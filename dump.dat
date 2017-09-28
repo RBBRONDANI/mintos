@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="en" prefix="og: http://ogp.me/ns#"><head><title>Primary Market</title><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="msapplication-config" content="none" /><meta name="theme-color" content="#78c8c7" /><link rel="alternate" hreflang="cs" href="/cs/seznamy-pujcek/primarni-trh/" /><link rel="alternate" hreflang="de" href="/de/darlehensnotierungen/primarmarkt/" /><link rel="alternate" hreflang="es" href="/es/lista-de-prestamos-para-invertir/mercado-primario/" /><link rel="alternate" hreflang="lv" href="/lv/pieejamie-aizdevumi/pirmreizejais-tirgus/" /><link rel="alternate" hreflang="pl" href="/pl/lista-pozyczek/rynek-pierwotny/" /><link rel="alternate" hreflang="ru" href="/ru/dostupnye-zajmy/pervichnyj-rynok/" /><meta name="description" content="Join the peer-to-peer lending marketplace and start investing in loans across Europe from as low as EUR 10."><meta property="og:description" content="Join the peer-to-peer lending marketplace and start investing in loans across Europe from as low as EUR 10." /><meta property="og:title" content="Primary Market" /><meta property="og:type" content="website" /><meta property="og:url" content="https://www.mintos.com/en/available-loans/primary-market/" /><meta property="og:image" content="https://www.mintos.com/mintos-logo-432x200.png" /><link rel="icon" type="image/x-icon" href="/favicon.ico" /><style>
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-zhaogang-cn-eur:before {
+        background: url("/assets/files/FC97E196-43AA-4676-1F2C-40E8D92903F7.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-iutecredit-al-eur:before {
+        background: url("/assets/files/E97E6A2B-E23E-10EE-8F3A-A563C0E8063E.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-creditstar-sp-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/235AAD18-DDFE-72A2-9CB3-EB04D3281521.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-getbucks-pl-pln:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/10B4EE46-6C0E-F082-1722-216D421E33E2.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-getbucks-pl-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/935798ED-F052-D282-6F8E-C707022A3593.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-big-ge-gel:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/ED46902E-5D33-73C8-B69D-B019EF9B2001.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-creditstar-pl-pln-new:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/60B18AD8-C892-6A09-7298-395AD2B8D0E6.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-creditstar-pl-eur-new:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/5769DD08-2B0F-1771-2D1F-2E9EFF388F0E.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-moneymetro-lv-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/CF8718B0-146B-0FD2-8A9D-F31E523F991F.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-moneymetro-lv-eur-new:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/01444D2C-02F8-3B13-889B-7BA0F009DDDC.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-mogo-ro-eur-bb:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/4D521069-0F9C-77C2-98F6-7EFA8A577677.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-getbucks-bw-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/A3BC0D4C-1112-F838-6584-8BD1E71A8B08.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-mogo-bg-eur-bb:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/028D7E9C-AFAF-BD7B-59F3-C8C1DFAD12A0.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-cashcredit-bg-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/3CB0256E-081A-D37A-5A04-A73EC05F29C8.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-moneyman-es-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/7B4F07F7-6D6F-DFBC-69C8-3C09E4F1CC3C.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-moneyman-ge-gel:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/5438E2A0-44D4-CE3D-B10F-B5C5844D5255.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-moneyman-ge-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/2E950968-85F3-204B-E7D4-4D6604CDFB06.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-creditstar-cz-eur:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/3319201C-1A9F-B9ED-E271-B344EEAB7CD5.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-creditstar-cz-czk:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/60980FDB-99AC-DBFE-6803-BE994604B44D.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-lendo-ge-gel-new:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/252F84D5-98DF-5932-44C6-52631523BD17.png") no-repeat center;
+    }
+        table.loan-table > tbody > tr > td.icon > i.icon.fa.icon-loan-originator-lendo-ge-eur-new:before {
+        background: url("https://s3.eu-central-1.amazonaws.com/mintos-prod-public-files/35A0FBF4-A98D-870C-7F46-4981AA973564.png") no-repeat center;
+    }
+    </style><link rel="stylesheet" href="/css/a4bad83-8e3d654.css" /><link rel="stylesheet" href="/css/a0e7957-3986836.css" /><script>
+    var currencies = "[{\"iso\":978,\"exponent\":2,\"abbreviation\":\"EUR\",\"symbol\":\"\\u20ac\"},{\"iso\":203,\"exponent\":2,\"abbreviation\":\"CZK\",\"symbol\":\"K\\u010d\"},{\"iso\":985,\"exponent\":2,\"abbreviation\":\"PLN\",\"symbol\":\"z\\u0142\"},{\"iso\":208,\"exponent\":2,\"abbreviation\":\"DKK\",\"symbol\":\"kr\"},{\"iso\":981,\"exponent\":2,\"abbreviation\":\"GEL\",\"symbol\":\"\\u10da\"},{\"iso\":946,\"exponent\":2,\"abbreviation\":\"RON\",\"symbol\":\"lei\"},{\"iso\":826,\"exponent\":2,\"abbreviation\":\"GBP\",\"symbol\":\"\\u00a3\"}]";
+	var currency_separator = " ";
+	var currency_position_left = true;
+	var thousand_separator = " ";
+	var decimal_point = ".";
+
+	var dateFormat = "d.m.Y";
+	var dateTimeFormat = "d.m.Y. H:i";
+    var dateTimeFormatShort = "d.m.Y H:i";
+	var dateFormatMoment = "DD.MM.YYYY";
+	var dateTimeFormatMoment = "DD.MM.YYYY HH:mm:ss";
+	var dateTimeFormatMomentMinutes = "DD.MM.YYYY HH:mm";
+	var dbDateFormat = "Y-m-d";
+	var dbDateTimeFormat = "Y-m-d H:i:s";
+
+	var currentLocale = "en";
+	var locales = ["cs","de","en","es","lv","pl","ru"];
+	var localesChoice = {"cs":"\u010cesk\u00fd","de":"Deutsch","en":"English","es":"Espa\u00f1ol","lv":"Latvie\u0161u","pl":"Polski","ru":"\u0420\u0443\u0441\u0441\u043a\u0438\u0439"};
+
+	var pluralizationForms = {
+		"en": function(n) { return parseInt(n!=1?1:0); }
+		,"lv": function(n) { return parseInt(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2); }
+		,"ru":  function(n) { return parseInt(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
+        ,"de": function(n) { return parseInt(n!=1?1:0); }
+	};
+
+	var translations = {
+		plurals: {
+			date: {
+				months: "month|months"
+				,on_months: "month|months"
+				,years: "year|years"
+				,on_years: "year|years"
+			}
+		}
+		,conjunctions: {
+			"and": "&"
+		}
+		,prepositions: {
+			"from": "from"
+			,"to": "to"
+			, "of": "of"
+		}
+		,confirms: {
+			"are_you_sure": "Delete this Auto Invest portfolio?"
+		}
+		,errors: {
+						"required": "Please fill in the field."
+			,"length_min_max": "Length must be between  %min% and %max% characters"
+			,"length_min_only": "Length must be at least %min% characters"
+			,"length_max_only": "Field must not be longer than %max% characters"
+			,"nosymbols": "This field may not contain special symbols. Unsupported symbols: %symbols_found%"
+			,"email": "This e-mail address is not valid."
+			,"email_exists": "This e-mail address is already registered!"
+			,"numbers": "Please fill in the field using only numbers."
+			,"registration_nr_exists": "User with this registration number is already registered."
+			,"pcode_exists": "User with this personal identification number is already registered!"
+			,"either": "Please indicate the property address!"
+			,"password": "Password must contain both letters and numbers"
+			,"password_length": "Password length must be %min% - %max% characters and include both letters and numbers"
+			,"password_oldpass_must_be_entered": "Please fill in the field."
+			,"agreement_borrower": "Please confirm that the provided information is accurate"
+			,"agreement_investor": "Please confirm that you accept the investment terms and conditions."
+			,"upload_limit": "Too many files selected"
+			,"equals": {
+				"password": "errors.equals.password"
+			}
+			,"payout": {
+				"not_enough_funds": "Your account does not have sufficient funds in the corresponding currency."
+			}
+		}
+		,form: {
+			password: {
+				show: "Show Password"
+				,hide: "Hide Password"
+                ,existing: "Current password"
+                ,new: "New Password"
+                ,title: "Password"
+			}
+			,multiple_choice: {
+				chosen: "Selected:%SELECTED%/%TOTAL%"
+				,check_uncheck_all: "Select/Clear All"
+			}
+		}
+		,misc: {
+			"next_tip": "Next"
+			,"prev_tip": "Previous"
+			,"close_tip": "close_tip"
+			,"pager_page_listing": "{page} of {totalPages}"
+		}
+		,tooltip: {
+            "investedSumAmount": "Principal that will be purchased %AMOUNT%"
+		}
+	};
+</script><script>
+    var urlList = {
+        "investor": {
+            "basket_update": "/en/investor/basket-data/",
+            "basket_remove": "/en/loan/remove-from-basket/",
+            "autoinvest_toggle": "/en/auto-invest/toggle/",
+            "autoinvest_delete": "/en/auto-invest/delete/",
+            "autoinvest_summary": "/en/auto-invest/summary/",
+            "update_settings": "/en/investor/update-settings"
+        },
+        "registration": {
+            "validate": "/en/registration/validate",
+            "pre_register": "/en/registration/pre_register"
+        }
+    };
+</script><link rel="stylesheet" href="/css/372aaab-2f2534a.css" /></head><body class=""><div id="main-wrapper"><div id="main-sub-wrapper"><div id="header-wrapper" class="header-wrapper"><div id="header" class="header m-container"><a href="/en/" id="logo" class="header-logo"></a><div class="arrow-down"></div><div class="header-hiring"><a href="/en/about-us/careers/#all-roles" title="We are hiring">We are hiring</a></div><ul id="top-nav-helper"><li class="main-nav-icon-container"><button type="button" class="button button-plain main-nav-icon js-navigation-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button></li><li id="user-profile-button" class="toggle-nav-dropdown"
+                data-target="#user-profile-dropdown"><button type="button" name="MyAccountButton" class="button button-plain my-account-button"><i class="fa fa-user"></i> My Account
+                </button></li><li class="lang-select-wrapper"><div id="lang-select-wrapper"><div id="current-lang">EN</div><ul id="lang-select"><li><a href="/cs/seznamy-pujcek/primarni-trh/">
+                                        CS
+                                    </a></li><li><a href="/de/darlehensnotierungen/primarmarkt/">
+                                        DE
+                                    </a></li><li><a href="/es/lista-de-prestamos-para-invertir/mercado-primario/">
+                                        ES
+                                    </a></li><li><a href="/lv/pieejamie-aizdevumi/pirmreizejais-tirgus/">
+                                        LV
+                                    </a></li><li><a href="/pl/lista-pozyczek/rynek-pierwotny/">
+                                        PL
+                                    </a></li><li><a href="/ru/dostupnye-zajmy/pervichnyj-rynok/">
+                                        RU
+                                    </a></li></ul></div></li></ul></div></div><div id="nav-block" class="main-nav "><div id="nav-wrapper" class="main-nav-wrapper"><div id="nav-sub-wrapper" class="m-container"><ul id="main-nav" class="navigation menu main-nav-list "><li class="main-nav-item "><a href="/en/invest/" class="main-nav-link">
+                                Invest
+                            </a><button type="button" class="m-submenu-toggle-btn js-submenu-toggle"><i class="fa fa-angle-down" aria-hidden="true"></i><i class="fa fa-angle-up" aria-hidden="true"></i></button><div id="submenu-wrapper" class="m-submenu"><div id="submenu-sub-wrapper" class="m-submenu-sub-wrapper m-container"><ul id="submenu" class="m-submenu-list"><li class="m-submenu-item"><a href="/en/invest/first-steps/" class="m-submenu-link ">
+                            Getting Started
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/invest/available-loans/" class="m-submenu-link ">
+                            Primary Market
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/invest/secondary-market/" class="m-submenu-link ">
+                            Secondary Market
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/invest/investor-protection/" class="m-submenu-link ">
+                            Investor Protection
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/invest/price-list/" class="m-submenu-link ">
+                            Fees
+
+                                                    </a></li></ul></div></div></li><li class="main-nav-item "><a href="/en/how-it-works/" class="main-nav-link">
+                                How It Works
+                            </a></li><li class="main-nav-item "><a href="/en/loan-originators/" class="main-nav-link">
+                                Loan Originators
+                            </a></li><li class="main-nav-item "><a href="/en/statistics/" class="main-nav-link">
+                                Statistics
+                            </a></li><li class="main-nav-item "><a href="/en/about-us/" class="main-nav-link">
+                                About Us
+                            </a><button type="button" class="m-submenu-toggle-btn js-submenu-toggle"><i class="fa fa-angle-down" aria-hidden="true"></i><i class="fa fa-angle-up" aria-hidden="true"></i></button><div id="submenu-wrapper" class="m-submenu"><div id="submenu-sub-wrapper" class="m-submenu-sub-wrapper m-container"><ul id="submenu" class="m-submenu-list"><li class="m-submenu-item"><a href="/en/about-us/about-us/" class="m-submenu-link ">
+                            About Us
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/about-us/investor-relations/" class="m-submenu-link ">
+                            Investor Relations
+
+                                                    </a></li><li class="m-submenu-item"><a href="/en/about-us/careers/" class="m-submenu-link ">
+                            Careers
+
+                                                    </a></li></ul></div></div></li><li class="main-nav-item "><a href="/en/faq/" class="main-nav-link">
+                                FAQ
+                            </a></li><li class="main-nav-item"><a class="main-nav-link" href="https://blog.mintos.com/category/news/">
+                            Blog
+                        </a></li></ul></div></div></div><div class="drop-down-wrapper" id="user-profile-dropdown"><div class="drop-down m-container"><a href="javascript:;" class="drop-down-close">×</a><form id="login-form" action="/en/login/check" method="post" class="account-login-form m-container"><input type="hidden" name="_csrf_token" value="vKmkNtdC4eYJsgvZH9O11zgaPfGEBIDOUgto-Wh3Nq8"/><div class="account-login"><input name="_username" type="email" class="submit-form-on-enter" placeholder="E-mail" value=""/><input name="_password" type="password" class="submit-form-on-enter u-mt-10" placeholder="Password"/><div class="account-actions u-pt-10"><button type="submit" class="btn btn-primary account-login-btn">
+                Log In
+            </button><a href="/en/password-reset-request/" id="forgot-password" class="account-password-reset u-pt-10">
+                Forgot password?
+            </a></div></div><div id="no-account" class="account-no-account"><h3 style="margin-bottom: 15px;">Not an investor yet?</h3>
+        Prospective investors can register 
+ <a href="/en/investor-registration/">here</a>.
+    </div></form></div></div><div id="content" class="top-padded"><div id="investments" class="js-market-filters m-container m-market" data-target="market"><h1>Primary Market</h1><form id="filter-wrapper-form"><div class="m-filters-main"><div class="js-filters-wrapper filters m-filter-container m-filters-wrapper m-filters-sliders"><div class="m-row m-filter-group" v-cloak><div class="m-control--slider has-chart mod-top-spacing-sm mod-no-spacing--left"><label>Interest Rate</label><chart-slider ref="interestSlider"
+                                          :chart-id="sliders.interest.chartId"
+                                          :initial-value="[6, 18]"
+                                          :min="6"
+                                          :max="18"
+                                          :formatter="interestFormatter"
+                                          :slider-interval="0.1"
+                                          :chart-interval="0.5"
+                                          :initial-dataset="[4198709.6684043,0,297758.57647199,107618.07133119,1546572.3053555,6620.1110044293,624934.41863589,69682.842086926,1216408.5443238,225684.96701979,1019170.7872125,824181.98566211,882021.55308531,207850.19382253,1409391.8536111,23164.171624905,379.5980653292,0,349872.00137748,0,0,0,936576.0300286,0]"
+                                          :initial-labels='[&quot;6%&quot;,&quot;6.5%&quot;,&quot;7%&quot;,&quot;7.5%&quot;,&quot;8%&quot;,&quot;8.5%&quot;,&quot;9%&quot;,&quot;9.5%&quot;,&quot;10%&quot;,&quot;10.5%&quot;,&quot;11%&quot;,&quot;11.5%&quot;,&quot;12%&quot;,&quot;12.5%&quot;,&quot;13%&quot;,&quot;13.5%&quot;,&quot;14%&quot;,&quot;14.5%&quot;,&quot;15%&quot;,&quot;15.5%&quot;,&quot;16%&quot;,&quot;16.5%&quot;,&quot;17%&quot;,&quot;17.5%&quot;]'
+                                          :dataset="sliders.interest.dataset"
+                                          :labels="sliders.interest.labels"
+                                          :min-label="'Lower Risk'"
+                                          :max-label="'Higher Risk'"
+                                          :min-input-name="'min_interest'"
+                                          :max-input-name="'max_interest'"
+                                          :tooltip-footer-message="'*amounts converted to EUR'"
+                                          :currency-select-selector="'#currencies'"></chart-slider></div><div class="m-control--slider has-chart mod-top-spacing-sm mod-no-spacing--right pull-right"><label>Term</label><chart-slider ref="termSlider"
+                                      :chart-id="sliders.term.chartId"
+                                      :initial-value="[0, 72]"
+                                      :min="0"
+                                      :max="72"
+                                      :formatter="monthNumberFormatter"
+                                      :slider-interval="1"
+                                      :chart-interval="3"
+                                      :initial-dataset="[1762248.283583,4928216.5291727,103659.48565236,1217841.0014659,426139.71842365,330043.7244851,325255.45753597,740687.32705947,614291.19411412,107466.40262494,161779.85251559,494751.60736484,292852.58984364,149013.79029416,164863.67170096,253701.69483689,196467.55331686,175147.06097194,247000.88218639,533503.94221862,180817.3911657,122372.80292384,195444.97073458,223030.74493256]"
+                                      :initial-labels='[&quot;0m.-3m.&quot;,&quot;3m.-6m.&quot;,&quot;6m.-9m.&quot;,&quot;9m.-12m.&quot;,&quot;12m.-15m.&quot;,&quot;15m.-18m.&quot;,&quot;18m.-21m.&quot;,&quot;21m.-24m.&quot;,&quot;24m.-27m.&quot;,&quot;27m.-30m.&quot;,&quot;30m.-33m.&quot;,&quot;33m.-36m.&quot;,&quot;36m.-39m.&quot;,&quot;39m.-42m.&quot;,&quot;42m.-45m.&quot;,&quot;45m.-48m.&quot;,&quot;48m.-51m.&quot;,&quot;51m.-54m.&quot;,&quot;54m.-57m.&quot;,&quot;57m.-60m.&quot;,&quot;60m.-63m.&quot;,&quot;63m.-66m.&quot;,&quot;66m.-69m.&quot;,&quot;69m.-72m.&quot;]'
+                                      :dataset="sliders.term.dataset"
+                                      :labels="sliders.term.labels"
+                                      :min-input-name="'min_term'"
+                                      :max-input-name="'max_term'"
+                                      :tooltip-footer-message="'*amounts converted to EUR'"
+                                      :currency-select-selector="'#currencies'"></chart-slider></div></div></div></div><div class="js-sidebar js-filters-wrapper m-filters-wrapper m-sidebar-filters"
+         @click="closeFilterModal($event)"
+         @keyup.esc="closeFilterModal($event)"
+         v-sticky-sidebar
+         v-cloak><button type="button" class="m-sidebar-filters-title" @click="toggleFilterModal()">
+            Additional Filters
+            <span class="m-sidebar-filters-count" v-if="selectedFilterGroups > 0" v-html="'(' + selectedFilterGroups + ')'"></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M 7.53278 2.29787L 24 2.29787L 24 3.82979L 7.59574 3.82979C 7.30003 5.28654 6.0121 6.38298 4.46809 6.38298C 2.92407 6.38298 1.63614 5.28654 1.34043 3.82979L 0 3.82979L 0 2.29787L 1.40339 2.29787C 1.78986 0.970203 3.01568 0 4.46809 0C 5.92049 0 7.14631 0.970203 7.53278 2.29787ZM 0 21.4468L 6.19149 21.4468C 6.4872 22.9036 7.77513 24 9.31915 24C 10.8632 24 12.1511 22.9036 12.4468 21.4468L 24 21.4468L 24 19.9149L 12.3838 19.9149C 11.9974 18.5872 10.7716 17.617 9.31915 17.617C 7.86674 17.617 6.64093 18.5872 6.25445 19.9149L 0 19.9149L 0 21.4468ZM 20.8094 12.766C 20.4229 14.0936 19.1971 15.0638 17.7447 15.0638C 16.2923 15.0638 15.0665 14.0936 14.68 12.766L 0 12.766L 0 11.234L 14.617 11.234C 14.9127 9.77729 16.2007 8.68085 17.7447 8.68085C 19.2887 8.68085 20.5766 9.77729 20.8723 11.234L 24 11.234L 24 12.766L 20.8094 12.766Z"/></svg></button><div class="m-sidebar-filters-container"><div class="m-sidebar-filters-form" v-show="filters.isVisible"><div class="js-scrollable m-sidebar-scrollarea"><div v-show="tags.length > 0" id="filter-tags"><label class="mod-top-spacing-md mod-top-spacing-lg">Selected filters:</label><div><div v-for="tag in tags" type="button" v-bind:data-tag-name="tag.name" class="btn btn-default btn-lg tags"><span>{{ tag.label }}</span><span class="remove" v-on:click="removeFilterTag(tag)"></span></div><div class="text-right" id="clear-filter"><a href="javascript:;"
+                                   class="btn btn-text clear-filter-button"
+                                   data-prevent-click="true"
+                                   v-on:click="cancelFilter()">
+                                    Cancel Filters
+                                </a></div></div></div><div id="js-additional-filters-container" class="m-additional-filters"><div id="js-additional-filters" class="m-filter-group mod-top-spacing-lg clearfix"><multi-select
+                                    :choices-counts='filters.choicesCounts.currencies'
+                                    :choices='{"978":{"attr":[],"label":"EUR","value":"978","data":{}},"203":{"attr":[],"label":"CZK","value":"203","data":{}},"985":{"attr":[],"label":"PLN","value":"985","data":{}},"208":{"attr":[],"label":"DKK","value":"208","data":{}},"981":{"attr":[],"label":"GEL","value":"981","data":{}},"946":{"attr":[],"label":"RON","value":"946","data":{}},"826":{"attr":[],"label":"GBP","value":"826","data":{}}}'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'currencies'"
+                                    :id="'sel-currencies'"
+                                    :input-name="'currencies[]'"
+                                    :is-expanded="filters.openGroups.currencies"
+                                    :label="'Currency'"
+                                    :label-tooltip="'To\x20invest\x20in\x20loans\x20you\x20must\x20have\x20sufficient\x20funds\x20in\x20the\x20corresponding\x20currency\x20in\x20your\x20account.\x20\x20You\x20can\x20add\x20funds\x20to\x20your\x20investor\x20account\x20\x3Ca\x20href\x3D\x22https\x3A\x2F\x2Fwww.mintos.com\x2Fen\x2Ftransactions\x2Fdeposit\x2F\x22\x20target\x3D\x22blank_\x22\x20\x3Ehere\x3C\x2Fa\x3E.\x20To\x20exchange\x20currency\x20use\x20our\x3Ca\x20href\x3D\x22https\x3A\x2F\x2Fwww.mintos.com\x2Fen\x2Ftransactions\x2Fcurrency\x2Dexchange\x2F\x22\x20target\x3D\x22blank_\x22\x20\x3E\x20Currency\x20Exchange\x3C\x2Fa\x3E.'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="currencies"
+                            ></multi-select><multi-select
+                                    :choices-counts='filters.choicesCounts.pledges'
+                                    :choices='[{"attr":[],"label":"Agricultural Loan","value":"7","data":7},{"attr":[],"label":"Business Loan","value":"32","data":32},{"attr":[],"label":"Car Loan","value":"2","data":2},{"attr":[],"label":"Invoice Financing","value":"5","data":5},{"attr":[],"label":"Mortgage Loan","value":"1","data":1},{"attr":[],"label":"Pawnbroking Loan","value":"6","data":6},{"attr":[],"label":"Personal Loan","value":"4","data":4},{"attr":[],"label":"Short-Term Loan","value":"8","data":8}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'pledges'"
+                                    :id="'sel-pledge'"
+                                    :input-name="'pledges[]'"
+                                    :is-expanded="filters.openGroups.pledges"
+                                    :label="'Loan Type'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="pledges"
+                            ></multi-select><multi-select
+                                    :choices-counts='filters.choicesCounts.countries'
+                                    :choices='[{"attr":[],"label":"Albania","value":83,"data":83},{"attr":[],"label":"Botswana","value":84,"data":84},{"attr":[],"label":"Bulgaria","value":22,"data":22},{"attr":[],"label":"China","value":72,"data":72},{"attr":[],"label":"Czech Republic","value":25,"data":25},{"attr":[],"label":"Denmark","value":26,"data":26},{"attr":[],"label":"Estonia","value":8,"data":8},{"attr":[],"label":"Georgia","value":53,"data":53},{"attr":[],"label":"Hong Kong","value":60,"data":60},{"attr":[],"label":"Latvia","value":17,"data":17},{"attr":[],"label":"Lithuania","value":19,"data":19},{"attr":[],"label":"Poland","value":37,"data":37},{"attr":[],"label":"Romania","value":39,"data":39},{"attr":[],"label":"Spain","value":43,"data":43}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'countries'"
+                                    :id="'sel-country'"
+                                    :input-name="'countries[]'"
+                                    :is-expanded="filters.openGroups.countries"
+                                    :label="'Country'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="countries"
+                            ></multi-select><multi-select
+                                    :choices-counts='filters.choicesCounts.lenderGroups'
+                                    :choices='[{"attr":[],"label":"Aasa","value":19,"data":19},{"attr":[],"label":"ACEMA","value":8,"data":8},{"attr":[],"label":"Aforti","value":9,"data":9},{"attr":[],"label":"AgroCredit","value":14,"data":14},{"attr":[],"label":"Aventus","value":15,"data":15},{"attr":[],"label":"Banknote","value":7,"data":7},{"attr":[],"label":"BIG","value":27,"data":27},{"attr":[],"label":"Capital Service","value":22,"data":22},{"attr":[],"label":"Capitalia","value":3,"data":3},{"attr":[],"label":"CashCredit","value":29,"data":29},{"attr":[],"label":"Creamfinance","value":4,"data":4},{"attr":[],"label":"Creditstar","value":11,"data":11},{"attr":[],"label":"Debifo","value":6,"data":6},{"attr":[],"label":"Eurocent","value":20,"data":20},{"attr":[],"label":"Extra Finance","value":17,"data":17},{"attr":[],"label":"GetBucks","value":26,"data":26},{"attr":[],"label":"Hipocredit","value":1,"data":1},{"attr":[],"label":"ID Finance","value":23,"data":23},{"attr":[],"label":"ITF Group","value":16,"data":16},{"attr":[],"label":"IuteCredit","value":25,"data":25},{"attr":[],"label":"Kredito garantas","value":12,"data":12},{"attr":[],"label":"Lendo","value":13,"data":13},{"attr":[],"label":"Mano Unija","value":5,"data":5},{"attr":[],"label":"Mogo","value":2,"data":2},{"attr":[],"label":"MoneyMetro","value":28,"data":28},{"attr":[],"label":"Mozipo Group","value":21,"data":21},{"attr":[],"label":"Nord Lizings","value":18,"data":18},{"attr":[],"label":"PangMaoBao","value":24,"data":24}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'lender_groups'"
+                                    :id="'sel-lenders'"
+                                    :input-name="'lender_groups[]'"
+                                    :is-expanded="filters.openGroups.lenderGroups"
+                                    :label="'Loan Originator'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="lender_groups"
+                            ></multi-select><single-select
+                                    :choices-counts='filters.choicesCounts.withBuyback'
+                                    :choices='[{"attr":[],"label":"Yes","value":"1","data":true},{"attr":[],"label":"No","value":"0","data":false}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'with_buyback'"
+                                    :id="'sel-buyback'"
+                                    :input-name="'with_buyback'"
+                                    :is-expanded="filters.openGroups.withBuyback"
+                                    :label="'Buyback Guarantee'"
+                                    :show-count="false"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="with_buyback"
+                            ></single-select><multi-select
+                                    :choices-counts='filters.choicesCounts.statuses'
+                                    :choices='[{"attr":[],"label":"Current","value":256,"data":256},{"attr":[],"label":"1-15 Days Late","value":512,"data":512},{"attr":[],"label":"16-30 Days Late","value":1024,"data":1024},{"attr":[],"label":"31-60 Days Late","value":2048,"data":2048},{"attr":[],"label":"60+ Days Late","value":8192,"data":8192}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'statuses'"
+                                    :id="'sel-status'"
+                                    :input-name="'statuses[]'"
+                                    :label="'Status'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="statuses"
+                            ></multi-select><multi-select
+                                    :choices-counts='filters.choicesCounts.scheduleTypes'
+                                    :choices='[{"attr":[],"label":"Full","value":1,"data":1},{"attr":[],"label":"Partial","value":2,"data":2},{"attr":[],"label":"Interest-only","value":4,"data":4},{"attr":[],"label":"Bullet","value":8,"data":8}]'
+                                    :css-class="'m-control--multiselect mod-top-spacing-md m-expandable'"
+                                    :filter-data-key="'schedule_types'"
+                                    :id="'sel-schedule-type'"
+                                    :input-name="'schedule_types[]'"
+                                    :label="'Amortization Method'"
+                                    :show-count="filters.showCount"
+                                    :toggle-all-label="toggleAllLabel"
+                                    :value='[]'
+                                    ref="schedule_types"
+                            ></multi-select><div id="sel-issue-date" class="m-expandable m-control--range mod-top-spacing-md" :class="{ open: filters.openGroups.issueDate }"><label class="title" @click="filters.openGroups.issueDate = !filters.openGroups.issueDate"><i class="fa fa-check" aria-hidden="true"
+                                       v-if="filters.filterData.issued_from && filters.filterData.issued_from.length > 0 || filters.filterData.issued_till && filters.filterData.issued_till.length > 0"></i>
+                                    Issue Date
+                                </label><div class="m-expandable--content"><div class="range-inputs"><div id="sel-issue-date-from" class="min"><datepicker :id="'issued_from'"
+                                                        :name="'issued_from'"
+                                                        :class-name="'m-datepicker'"
+                                                        :initial-value="''"
+                                                        ref="issued_from"></datepicker></div><div id="sel-issue-date-to" class="max"><datepicker :id="'issued_till'"
+                                                        :name="'issued_till'"
+                                                        :class-name="'m-datepicker'"
+                                                        :initial-value="''"
+                                                        ref="issued_till"></datepicker></div></div></div></div><div id="sel-listing-date" class="m-expandable m-control--range mod-top-spacing-md" :class="{ open: filters.openGroups.listingDate }"><label class="title" @click="filters.openGroups.listingDate = !filters.openGroups.listingDate"><i class="fa fa-check" aria-hidden="true"
+                                       v-if="filters.filterData.listing_from && filters.filterData.listing_from.length > 0 || filters.filterData.listing_till && filters.filterData.listing_till.length > 0"></i>
+                                    Listing Date
+                                </label><div class="m-expandable--content"><div class="range-inputs"><div id="sel-listing-date-from" class="min"><datepicker :id="'listing_from'"
+                                                        :name="'listing_from'"
+                                                        :class-name="'m-datepicker'"
+                                                        :initial-value="''"
+                                                        ref="listing_from"></datepicker></div><div id="sel-listing-date-to" class="max"><datepicker :id="'listing_till'"
+                                                        :name="'listing_till'"
+                                                        :class-name="'m-datepicker'"
+                                                        :initial-value="''"
+                                                        ref="listing_till"></datepicker></div></div></div></div><div id="sel-available-amount" class="m-expandable m-control--range mod-top-spacing-md" :class="{ open: filters.openGroups.availableAmount }"><label class="title" @click="filters.openGroups.availableAmount = !filters.openGroups.availableAmount"><i class="fa fa-check" aria-hidden="true"
+                                       v-if="filters.filterData.min_amount && filters.filterData.min_amount.length > 0 || filters.filterData.max_amount && filters.filterData.max_amount.length > 0"></i>
+                                    Amount Available for Investment
+                                </label><div class="m-expandable--content"><div class="range-inputs"><div id="sel-available-amount-from" class="min"><text-input :id="'min_amount'"
+                                                        :name="'min_amount'"
+                                                        :class-name="'input-sm form-control'"
+                                                        :formatter="'formatMultiCurrency'"
+                                                        :initial-value="''"
+                                                        :input-type="'number'"
+                                                        ref="min_amount"></text-input></div><div id="sel-available-amount-to" class="max"><text-input :id="'max_amount'"
+                                                        :name="'max_amount'"
+                                                        :class-name="'input-sm form-control'"
+                                                        :data-parser="'extractNumbers'"
+                                                        :formatter="'formatMultiCurrency'"
+                                                        :initial-value="''"
+                                                        :input-type="'number'"
+                                                        ref="max_amount"></text-input></div></div></div></div><div id="sel-ltv" class="m-expandable m-control--range mod-top-spacing-md" :class="{ open: filters.openGroups.ltv }"><label class="title" @click="filters.openGroups.ltv = !filters.openGroups.ltv"><i class="fa fa-check" aria-hidden="true"
+                                       v-if="filters.filterData.min_ltv && filters.filterData.min_ltv.length > 0 || filters.filterData.max_ltv && filters.filterData.max_ltv.length > 0"></i>
+                                    LTV
+                                </label><div class="m-expandable--content"><div class="range-inputs"><div id="sel-ltv-from" class="min"><text-input :class-name="'input-sm form-control'"
+                                                        :data-parser="'extractNumbers'"
+                                                        :formatter="'percentFilter'"
+                                                        :id="'min_ltv'"
+                                                        :initial-value="''"
+                                                        :name="'min_ltv'"
+                                                        ref="min_ltv"></text-input></div><div id="sel-ltv-to" class="max"><text-input :class-name="'input-sm form-control'"
+                                                        :data-parser="'extractNumbers'"
+                                                        :formatter="'percentFilter'"
+                                                        :initial-value="''"
+                                                        :name="'max_ltv'"
+                                                        :id="'max_ltv'"
+                                                        ref="max_ltv"></text-input></div></div></div></div><div id="sel-loan-id" class="m-expandable m-control--input mod-top-spacing-md" :class="{ open: filters.openGroups.loanId }"><label class="title" @click="filters.openGroups.loanId = !filters.openGroups.loanId"><i class="fa fa-check" aria-hidden="true" v-if="filters.filterData.loan_id && filters.filterData.loan_id.length > 0"></i>
+                                    Loan ID
+                                </label><div class="m-expandable--content"><text-input :id="'loan_id'"
+                                                :name="'loan_id'"
+                                                :class-name="'input-sm form-control'"
+                                                :initial-value="''"
+                                                ref="loan_id"></text-input></div></div></div></div></div><div class="m-filter-footer clearfix"><div class="m-control--link" id="clear-filter"><a href="javascript:;"
+                           id="filter-button"
+                           class="btn btn-text text-right"
+                           data-url="/en/market/primary/list"
+                           data-normalize="true"
+                           @click="toggleFilterModal()"><i id="filter-button-icon" class="fa fa-refresh"></i>
+                            Filter
+                        </a><a href="javascript:;"
+                           id="clear-filter-button"
+                           class="btn btn-text clear-filter-button text-right"
+                           data-prevent-click="true"
+                           @click="cancelFilter()">
+                            Cancel Filters
+                        </a></div></div><input type="hidden" 	id="sort_field" name="sort_field"									class="sort-field input-sm form-control" value="interest" /><input type="hidden" 	id="sort_order" name="sort_order"									class="sort-order input-sm form-control" value="DESC" /><input type="hidden" 	id="max_results" name="max_results"									class="max-results input-sm form-control" value="20" /><input type="hidden" 	id="page" name="page"									class="page input-sm form-control" value="1" /></div></div></div></form><div id="filter-results-wrapper" class="loan-projects-wrapper unauthorized"></div></div></div></div><div id="footer-wrapper" class="footer footer-wrapper"><div class="m-container"><div id="footer" class="footer-container"><div class="m-row"><div class="footer-left-sidebar"><a class="footer-logo" href="/"></a></div><div class="footer-col-left u-pt-20"><ul class="footer-pagelinks"><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/invest/">
+                    Invest
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/how-it-works/">
+                    How It Works
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/loan-originators/">
+                    Loan Originators
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/statistics/">
+                    Statistics
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/about-us/">
+                    About Us
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="/en/faq/">
+                    FAQ
+                </a></h3></li><li class="footer-pagelink"><h3 class="footer-h3 u-pt-10"><a href="https://blog.mintos.com/category/news/">
+                Blog
+            </a></h3></li></ul><div class="footer-links u-pt-10"><a class="footer-link has-hover" id="careers"
+                           href="/en/about-us/careers/"
+                        >
+                            Careers
+                        </a><a class="footer-link has-hover" id="careers"
+                           href="http://blog.mintos.com/media-center/">
+                            Media Center
+                        </a><a class="footer-link has-hover" id="investor-protection"
+                           href="https://www.mintos.com/en/invest/investor-protection/">
+                            Investor Protection
+                        </a></div></div><div class="footer-col right"><div class="m-row"><div class="footer-contacts"><h3 class="footer-h3 u-pt-30">
+                                Contacts
+                            </h3><p class="footer-contacts-links u-pt-10"><a class="footer-contacts-link" href="tel:+44 157 893 0033"><img src="/assets/vendor/flags/flags/flags-iso/flat/16/GB.png" alt="Mintos" />&nbsp&nbsp+44 157 893 0033
+                                </a><br/><a class="footer-contacts-link" href="tel:+49 21 136 874 563"><img src="/assets/vendor/flags/flags/flags-iso/flat/16/DE.png" alt="Mintos" />&nbsp&nbsp+49 21 136 874 563
+                                </a><br/><a class="footer-contacts-link" href="tel:+371 66 164 466"><img src="/assets/vendor/flags/flags/flags-iso/flat/16/LV.png" alt="Mintos" />&nbsp&nbsp+371 66 164 466
+                                </a><br/><a class="footer-contacts-link" href="tel:+371 66 164 488"><img src="/assets/vendor/flags/flags/flags-iso/flat/16/RU.png" alt="Mintos" />&nbsp&nbsp+371 66 164 488
+                                </a><br/><a class="footer-contacts-link" href="tel:+420 538 880 188 "><img src="/assets/vendor/flags/flags/flags-iso/flat/16/CZ.png" alt="Mintos" />&nbsp&nbsp+420 538 880 188 
+                                </a><br/><a class="footer-contacts-link" href="tel:+48 61 880 09 00 "><img src="/assets/vendor/flags/flags/flags-iso/flat/16/PL.png" alt="Mintos" />&nbsp&nbsp+48 61 880 09 00 
+                                </a><br/><a class="footer-contacts-link" href="/cdn-cgi/l/email-protection#7d0e080d0d120f093d10141309120e531e1210">
+                                    <span class="__cf_email__" data-cfemail="7d0e080d0d120f093d10141309120e531e1210">[email&#160;protected]</span>
+                                </a></p></div><div class="footer-office"><h3 class="footer-h3 u-pt-30">
+                                Mintos Office
+                            </h3><p class="office-address u-pt-10">
+                                AS Mintos Marketplace <br />
+Skanstes 50<br />
+Riga, LV-1013<br />
+Latvia
+                            </p></div><div class="footer-social u-pt-30"><a class="footer-social-link" href="https://www.facebook.com/MintosMarketplace"
+                               target="_blank"
+                               data-placement="top"
+                               id="facebook"
+                            ></a><a class="footer-social-link" href="https://twitter.com/MintosPlatform"
+                               target="_blank"
+                               data-placement="top"
+                               id="twitter"
+                            ></a><a class="footer-social-link" href="https://www.linkedin.com/company/mintos"
+                               target="_blank"
+                               data-placement="top"
+                               id="linkedin"
+                            ></a><a class="footer-social-link" href="//plus.google.com/115951696607274735613"
+                               rel="publisher"
+                               target="_blank"
+                               data-placement="top"
+                               id="googleplus"
+                            ></a><a class="footer-social-link" href="//youtube.com/channel/UCb3_KUaR6LvLf9vRXz3h30w"
+                               target="_blank"
+                               data-placement="top"
+                               id="youtube"
+                            ></a></div></div></div><div class="footer-bottom-info"><h2 class="footer-h3 m-member-title">Member of</h2><div class="m-member-of"><a href="http://www.ahk-balt.org/home/" class="m-member-of-logo" target="_blank"><img src="/assets/images/ahk-footer-logo.jpg"></a><a href="https://www.chamber.lv/" class="m-member-of-logo mod-has-pad" target="_blank"><img src="/assets/images/ltrk-logo.png"></a><a href="http://www.lafpa.lv/" class="m-member-of-logo mod-has-pad" target="_blank"><img src="/assets/images/lafpa-logo.png"></a></div><div class="m-small-links"><a class="footer-link has-hover"
+                           href="/en/doc/user_agreement"
+                           target="_blank">
+                            User Agreement
+                        </a><a class="footer-link has-hover"
+                           href="/en/doc/mintos_refer_a_friend"
+                           target="_blank">
+                            Refer-a-Friend T&amp;C
+                        </a><a class="footer-link has-hover" id="affiliate"
+                           href="/en/join-our-affiliate-program-and-earn-money/"
+                           target="_blank">
+                            Affiliate Program
+                        </a></div><div id="cookie-policy" class="footer-cookie-policy">
+                        By using our website you agree to the use of cookies in accordance with our <a href="/en/cookie-policy/">cookies policy</a>.
+                    </div><div class="footer-copyright">
+                        © 2017 All rights reserved
+                    </div></div></div></div></div></div></div><div class="modal fade" id="multi-purpose-modal" tabindex="-1" role="dialog" aria-labelledby="multi-purpose-modal-title" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><h4 class="modal-title" id="multi-purpose-modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div><script>!function(e,t,r,n,c,a,l){function i(t,r){return r=e.createElement('div'),r.innerHTML='<a href="'+t.replace(/"/g,'&quot;')+'"></a>',r.childNodes[0].getAttribute('href')}function o(e,t,r,n){for(r='',n='0x'+e.substr(t,2)|0,t+=2;t<e.length;t+=2)r+=String.fromCharCode('0x'+e.substr(t,2)^n);return i(r)}try{for(c=e.getElementsByTagName('a'),l='/cdn-cgi/l/email-protection#',n=0;n<c.length;n++)try{(t=(a=c[n]).href.indexOf(l))>-1&&(a.href='mailto:'+o(a.href,t+l.length))}catch(e){}for(c=e.querySelectorAll('.__cf_email__'),n=0;n<c.length;n++)try{(a=c[n]).parentNode.replaceChild(e.createTextNode(o(a.getAttribute('data-cfemail'),0)),a)}catch(e){}}catch(e){}}(document);</script><script src="/js/241d442-1efe5f6.js"></script><script src="/js/ad605f7-2c2a6cd.js"></script><script src="/js/ff290ca-d3d8fbc.js"></script><script>
+        tagTranslations = {
+            'issued_from': "Issue date from",
+            'issued_till': "Issue date to",
+            'listing_from': "Listing date from",
+            'listing_till': "Listing date to",
+            'min_amount': "Minimum amount available",
+            'max_amount': "Maximum amount available",
+            'min_ltv': "LTV from",
+            'max_ltv': "LTV to",
+            'loan_id': "Loan ID",
+            'min_ytm': "YTM from",
+            'max_ytm': "YTM to",
+            'min_premium': "Discount/premium from",
+            'max_premium': "Discount/premium to",
+            'with_buyback': "Buyback guarantee",
+            'min_interest': "Interest from",
+            'max_interest': "Interest to",
+            'min_term': "Term from",
+            'max_term': "Term to",
+            'yes': "Yes",
+            'no': "No",
+            'i_have_invested': "Include my investments",
+            'i_have_not_invested': "Exclude my investments"
+        };
+    </script><script src="/js/db62e4e-abf63f3.js"></script><!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NVZNR3"
+                height="0" width="0" style="display:none; visibility:hidden"></iframe></noscript><script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NVZNR3');
+    </script><!-- End Google Tag Manager --><script type="text/javascript" src='https://i.ctnsnet.com/int/integration?pixel=35820184&nid=304780&cont=s' async="true"></script><script type="text/javascript" src='https://i.ctnsnet.com/int/integration?pixel=35820186&nid=304780&cont=s' async="true"></script><script type="text/javascript">
+        window._adftrack = {
+            pm: 578203
+        };
+        (function () { var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://track.adform.net/serving/scripts/trackpoint/async/'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); })();
+
+    </script><noscript><img class="hide" src="https://track.adform.net/Serving/TrackPoint/?pm=578203" width="1" height="1" alt="" /></noscript><script>/*<![CDATA[*/
+        window.zEmbed || function (e, t) {
+            var n, o, d, i, s, a = [], r = document.createElement("iframe");
+            window.zEmbed = function () {
+                a.push(arguments)
+            }, window.zE = window.zE || window.zEmbed, r.src = "javascript:false", r.title = "", r.role = "presentation", (r.frameElement || r).style.cssText = "display: none", d = document.getElementsByTagName("script"), d = d[d.length - 1], d.parentNode.insertBefore(r, d), i = r.contentWindow, s = i.document;
+            try {
+                o = s
+            } catch (c) {
+                n = document.domain, r.src = 'javascript:var d=document.open();d.domain="' + n + '";void(0);', o = s
+            }
+            o.open()._l = function () {
+                var o = this.createElement("script");
+                n && (this.domain = n), o.id = "js-iframe-async", o.src = e, this.t = +new Date, this.zendeskHost = t, this.zEQueue = a, this.body.appendChild(o)
+            }, o.write('<body onload="document._l();">'), o.close()
+        }("//assets.zendesk.com/embeddable_framework/main.js", "mintos.zendesk.com");
+        /*]]>*/</script></body></html>

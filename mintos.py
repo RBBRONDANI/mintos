@@ -3,6 +3,10 @@ import time
 import os
 import requests
 from bs4 import BeautifulSoup
+from contextlib import closing
+from selenium.webdriver import Firefox # pip install selenium
+from selenium.webdriver.support.ui import WebDriverWait
+#from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from sign.signdef import *
 from pdb import set_trace as bp
 
@@ -23,9 +27,24 @@ class MI:
         if r.status_code != 200:
             self.ts_exit("Unable to get loan list")
         soup = BeautifulSoup(r.text, "html.parser") # response parsing
-        table = soup.find('table', {'id': 'primary-market-table'}) # Find users table
-        bp()
-        return {}
+        table = soup.find('table', {'id': 'primary-market-table'}) # find primary market table
+
+#        binary = FirefoxBinary('/usr/bin')
+
+# use firefox to get page with javascript generated content
+#        with closing(Firefox(executable_path = "/usr/local/bin/geckodriver")) as browser:
+        with closing(Firefox()) as browser:
+#        with closing(Chrome()) as browser:
+            browser.post(self.host + "/login/check", data = payload)
+#            button = browser.find_element_by_name('button')
+#            button.click()
+# wait for the page to load
+            WebDriverWait(browser, timeout=10).until(
+                lambda x: x.find_element_by_id('primary-market-table'))
+# store it to string variable
+            page_source = browser.page_source
+#       bp()
+        return page_source
 """
 table_body = table.find('tbody') # Skip head, take body
 rows = table_body.find_all('tr') # All rows from table

@@ -38,8 +38,8 @@ m = Mintos(H)
 try:
     print("Main part\n")
     m.numlist = m.getNewLoans()
-    bp()
-#    open("out.txt", 'w').write(m.numlist)
+#    bp()
+    open("dump.dat", 'w').write(m.numlist)
 #    time.sleep(5)
 finally:
     m.ulock()
