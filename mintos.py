@@ -3,6 +3,7 @@ import time
 import os
 import requests
 import codecs
+import re
 from bs4 import BeautifulSoup
 from contextlib import closing
 from selenium import webdriver
@@ -17,79 +18,38 @@ class MI:
         self.host = "https://www.mintos.com/en"
         self.user = os.environ['MINTOS_USER'] # export MINTOS_USER=mintosuser
         self.passwd = os.environ['MINTOS_PASS'] # export MINTOS_PASS=secret
+        self.new_loans = []
+        self.loan_last = 0
     def ts_exit(self, msg):
         sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
     def getNewLoans(self):
         payload = {"_csrf_token": "7TOfAlMdEOAA2IvxkUJBd12Dy_vt7zLdI1HAXl5Hre0", "_username": self.user, "_password": self.passwd}
-#        session = requests.Session()
-#        r = session.post(self.host + "/login/check", data = payload) # send auth form
-#        if r.status_code != 200:
-#            self.ts_exit("Unable to open login page")
-#        r = session.get(self.host + "/available-loans/primary-market") # get loan list
-#        if r.status_code != 200:
-#            self.ts_exit("Unable to get loan list")
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-#        with closing(Chrome(chrome_options=options)) as browser:
-#            browser.request('POST', self.host + "/login/check", data = payload)
-#            browser.get(self.host + "/available-loans/primary-market")
-            # store it to string variable
-        page_source = codecs.open("./tmp/dump.html", 'r', 'utf-8').read()
-            #page_source = browser.page_source
-        #codecs.open("./tmp/dump.html", 'w', 'utf-8').write(page_source)
+        with closing(Chrome(chrome_options=options)) as browser:
+            browser.request('POST', self.host + "/login/check", data = payload)
+            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+            page_source = browser.page_source # store it to string variable
         soup = BeautifulSoup(page_source, "html.parser") # response parsing
         # find primary market table
-        rows = soup.find('table', {'id': 'primary-market-table'}).find('tbody').find_all('tr')
-        numlist = []
-        for row in rows:
-            cols = row.find_all('td')
-            numlist.append(cols[0].get_text())
-            #print(cols[1].get_text())
+        rows = soup.find('table', {'id': 'primary-market-table'})
+        if rows is not None:
+            rows = rows.find('tbody').find_all('tr')
+        pattern = re.compile("\d+")
+        self.new_loans = []
+        if rows is not None:
+            for row in rows:
+                cols = row.find_all('td')
+                loan = int(pattern.search(cols[0].get_text()).group())
+                if loan > self.loan_last:
+                    self.new_loans.append(loan)
+        if len(self.new_loans) > 0:
+            self.loan_last = self.new_loans[0]
+
+        return self.new_loans
+
 #            button = browser.find_element_by_name('button')
 #            button.click()
 # wait for the page to load
 #            WebDriverWait(browser, timeout=10).until(
 #                lambda x: x.find_element_by_id('primary-market-table'))
-        return numlist
-"""
-table_body = table.find('tbody') # Skip head, take body
-rows = table_body.find_all('tr') # All rows from table
-point = datetime.now() # Fix point of time
-recipients = []
-for row in rows:
-    cols = row.find_all('td') # All columns from iterating row
-    user = cols[2].get_text() # User email
-    recipients.append(user) # Add email to list of recipients
-    if datetime.strptime(cols[8].get_text(), "%Y-%m-%d %H:%M:%S") < point - timedelta(days=DELTA): # Break if expired
-        break
-
-
-
-"""
-"""
-    def sign(self, ss):
-        try:
-            return str(subprocess.check_output([self.wmsigner, "-s", ss]), 'ascii')
-        except subprocess.CalledProcessError as e:
-            self.ts_exit(e.output)
-    def getPortfolio(self, tid):
-        path = "/ZTenders.ashx"
-        t = str(int(time.time())) + '000'
-        ss = self.sign(mWMID + ';' + tid + ';' + t)
-        params = "WMID="+mWMID+"&TID="+tid+"&t="+t+"&VR=1&SS="+ss
-        return self.httpReq('https', path, params, 'get')
-#        return [t, str(self.sign(t))]
-    def httpReq(self, proto, path, params, reqtype):
-        session = requests.Session()
-        if reqtype == 'get':
-            r = session.get(proto + '://' + self.host + path + '?' + params)
-        elif reqtype == 'post':
-            payload = params
-            r = session.post(proto + '://' + self.host + path, data = payload)
-        else:
-            self.ts_exit("httpReq: illegal reqtype")
-        if r.status_code != 200:
-            self.ts_exit("httpReq: http_code = " + str(r.status_code))
-        else:
-            return r.text
-"""
