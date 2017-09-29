@@ -39,3 +39,8 @@ try:
     r.data_sync("status")
 finally:
     r.ulock()
+
+# TODO
+# generate initial ID for the auth _csrf_token
+# schedule logging of new records statistic
+#
