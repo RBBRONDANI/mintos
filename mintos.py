@@ -4,7 +4,7 @@ import os
 import requests
 import codecs
 import re
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 from contextlib import closing
 from selenium import webdriver
 from seleniumrequests import Chrome # pip install selenium
@@ -23,14 +23,16 @@ class MI:
     def ts_exit(self, msg):
         sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
     def getNewLoans(self):
-        payload = {"_csrf_token": "7TOfAlMdEOAA2IvxkUJBd12Dy_vt7zLdI1HAXl5Hre0", "_username": self.user, "_password": self.passwd}
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         with closing(Chrome(chrome_options=options)) as browser:
+            browser.get(self.host + "/")
+            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
             browser.request('POST', self.host + "/login/check", data = payload)
             browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
             page_source = browser.page_source # store it to string variable
-        soup = BeautifulSoup(page_source, "html.parser") # response parsing
+        soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
         if rows is not None:
