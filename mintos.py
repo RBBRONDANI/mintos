@@ -10,7 +10,6 @@ from selenium import webdriver
 from seleniumrequests import Chrome # pip install selenium
 #from selenium.webdriver.support.ui import WebDriverWait
 #from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from sign.signdef import *
 from pdb import set_trace as bp
 
 class MI:
