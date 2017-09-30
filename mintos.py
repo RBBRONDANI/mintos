@@ -7,7 +7,7 @@ import re
 from bs4 import BeautifulSoup as bs
 from contextlib import closing
 from selenium import webdriver
-from seleniumrequests import Chrome # pip install selenium
+from seleniumrequests import Chrome
 #from selenium.webdriver.support.ui import WebDriverWait
 #from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from pdb import set_trace as bp

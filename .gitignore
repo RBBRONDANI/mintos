@@ -1,3 +1,4 @@
 tmp/*
 *.pyc
 dat/*.dat
+log/*
