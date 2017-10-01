@@ -24,26 +24,53 @@ class MI:
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        with closing(Chrome(chrome_options=options)) as browser:
-            browser.get(self.host + "/")
-            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
-            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
-            browser.request('POST', self.host + "/login/check", data = payload)
-            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
-            page_source = browser.page_source # store it to string variable
+#        with closing(Chrome(chrome_options=options)) as browser:
+#            browser.get(self.host + "/")
+#            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+#            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
+#            browser.request('POST', self.host + "/login/check", data = payload)
+#            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+#            page_source = browser.page_source # store it to string variable
+# debug
+#        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
+        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
         soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
         if rows is not None:
             rows = rows.find('tbody').find_all('tr')
-        pattern = re.compile("\d+")
         self.new_loans = []
+        pattern = {   'id': [
+                                "(\d+)",
+                                'loan-id-col m-loan-id',
+                            ],
+                   'issue': [
+                                "(\d{2}\.\d{2}\.\d{4})",
+                                'm-loan-issued m-labeled-col',
+                            ],
+                    'type': [
+                                "(Personal Loan|Car Loan|Mortgage Loan|Business Loan|Invoice Financing|Short-Term Loan)",
+                                'm-loan-type',
+                            ],
+                    'rate': [
+                                "(\d*\.\d+|\d+)\%",
+                                'global-align-right m-loan-interest m-labeled-col',
+                            ],
+                  }
+        pattern = {field: [
+                              pattern[field][0],
+                              pattern[field][1],
+                              re.compile(pattern[field][0]),
+                          ] 
+                   for field in pattern}
         if rows is not None:
             for row in rows:
-                cols = row.find_all('td')
-                loan = int(pattern.search(cols[0].get_text()).group())
-                if loan > self.loan_last:
-                    self.new_loans.append(loan)
+                cols = {field: row.find('td', {'class': pattern[field][1]}) for field in pattern}
+                loan = {field: pattern[field][2].search(cols[field].get_text()).group(1) for field in pattern}
+                loan['id'] = int(loan['id'])
+                print(loan)
+                if loan['id'] > self.loan_last:
+                    self.new_loans.append(loan['id'])
         if len(self.new_loans) > 0:
             self.loan_last = self.new_loans[0]
 
