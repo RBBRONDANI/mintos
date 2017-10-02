@@ -41,33 +41,51 @@ class MI:
             rows = rows.find('tbody').find_all('tr')
         self.new_loans = []
         pattern = {   'id': [
-                                "(\d+)",
+                                r'(\d+)',
                                 'loan-id-col m-loan-id',
                             ],
                    'issue': [
-                                "(\d{2}\.\d{2}\.\d{4})",
+                                r'(\d{2}\.\d{2}\.\d{4})',
                                 'm-loan-issued m-labeled-col',
                             ],
                     'type': [
-                                "(Personal Loan|Car Loan|Mortgage Loan|Business Loan|Invoice Financing|Short-Term Loan)",
+                                r'(Personal Loan|Car Loan|Mortgage Loan|Business Loan|Invoice Financing|Short-Term Loan)',
                                 'm-loan-type',
                             ],
+                  'amount': [
+                                r'(\d+\.\d+|\d+)',
+                                'global-align-right m-loan-amount m-labeled-col',
+                            ],
                     'rate': [
-                                "(\d*\.\d+|\d+)\%",
+                                r'(\d*\.\d+|\d+)\%',
                                 'global-align-right m-loan-interest m-labeled-col',
+                            ],
+                    'term': [
+                                r'(.*)',
+                                'global-align-right m-loan-term m-labeled-col',
+                            ],
+               'available': [
+                                r'(\d+\.\d+|\d+)',
+                                'global-align-right m-labeled-col mod-highlighted',
+                            ],
+                     'cur': [
+                                r'(\u20AC|.) \d+',
+                                'global-align-right m-labeled-col mod-highlighted',
                             ],
                   }
         pattern = {field: [
                               pattern[field][0],
                               pattern[field][1],
                               re.compile(pattern[field][0]),
-                          ] 
+                          ]
                    for field in pattern}
         if rows is not None:
             for row in rows:
                 cols = {field: row.find('td', {'class': pattern[field][1]}) for field in pattern}
                 loan = {field: pattern[field][2].search(cols[field].get_text()).group(1) for field in pattern}
                 loan['id'] = int(loan['id'])
+#                loan['issue'] = time.strptime(loan['issue'], '%d.%m.%Y')
+                loan['rate'] = float(loan['rate'])
                 print(loan)
                 if loan['id'] > self.loan_last:
                     self.new_loans.append(loan['id'])
