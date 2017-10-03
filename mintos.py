@@ -24,22 +24,22 @@ class MI:
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-#        with closing(Chrome(chrome_options=options)) as browser:
-#            browser.get(self.host + "/")
-#            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
-#            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
-#            browser.request('POST', self.host + "/login/check", data = payload)
-#            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
-#            page_source = browser.page_source # store it to string variable
+        with closing(Chrome(chrome_options=options)) as browser:
+            browser.get(self.host + "/")
+            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
+            browser.request('POST', self.host + "/login/check", data = payload)
+            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+            page_source = browser.page_source # store it to string variable
 # debug
 #        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
-        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
+#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
         soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
         if rows is not None:
             rows = rows.find('tbody').find_all('tr')
-        self.new_loans = {}
+        self.new_loans = []
         pattern = {   'id': [
                                 r'(\d+)',
                                 'loan-id-col m-loan-id',
@@ -114,11 +114,11 @@ class MI:
                     loan['cur'] = None
 #                elif loan['cur'] == '\u10DA': # other ccy not for now...
 #                    loan['cur'] = 'GEL'
-                print(loan)
+#                print(loan)
                 if loan['id'] > self.loan_last:
                     self.new_loans.append(loan)
         if len(self.new_loans) > 0:
-            self.loan_last = self.new_loans[0]
+            self.loan_last = self.new_loans[0]['id']
 
         return self.new_loans
 

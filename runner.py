@@ -34,7 +34,7 @@ class Runner(MI):
 r = Runner(H)
 try:
     r.getNewLoans()
-    print(time.strftime("%Y-%m-%d %H:%M:%S"), len(r.new_loans), r.new_loans)
+    print(time.strftime("%Y-%m-%d %H:%M:%S"), len(r.new_loans), [loan['id'] for loan in r.new_loans])
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:
