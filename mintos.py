@@ -64,7 +64,7 @@ class MI:
                                 r'(\d+) d\.',
                                 'global-align-right m-loan-term m-labeled-col',
                             ],
-                    'term_m': [
+                  'term_m': [
                                 r'(\d+) m\.',
                                 'global-align-right m-loan-term m-labeled-col',
                             ],
@@ -114,7 +114,6 @@ class MI:
                     loan['cur'] = None
 #                elif loan['cur'] == '\u10DA': # other ccy not for now...
 #                    loan['cur'] = 'GEL'
-#                print(loan)
                 if loan['id'] > self.loan_last:
                     self.new_loans.append(loan)
         if len(self.new_loans) > 0:
