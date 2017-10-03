@@ -39,7 +39,7 @@ class MI:
         rows = soup.find('table', {'id': 'primary-market-table'})
         if rows is not None:
             rows = rows.find('tbody').find_all('tr')
-        self.new_loans = []
+        self.new_loans = {}
         pattern = {   'id': [
                                 r'(\d+)',
                                 'loan-id-col m-loan-id',
@@ -61,7 +61,11 @@ class MI:
                                 'global-align-right m-loan-interest m-labeled-col',
                             ],
                     'term': [
-                                r'(.*)',
+                                r'(\d+) d\.',
+                                'global-align-right m-loan-term m-labeled-col',
+                            ],
+                    'term_m': [
+                                r'(\d+) m\.',
                                 'global-align-right m-loan-term m-labeled-col',
                             ],
                'available': [
@@ -69,7 +73,7 @@ class MI:
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                      'cur': [
-                                r'(\u20AC|.) \d+',
+                                r'(.) \d+',
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                   }
@@ -81,14 +85,38 @@ class MI:
                    for field in pattern}
         if rows is not None:
             for row in rows:
-                cols = {field: row.find('td', {'class': pattern[field][1]}) for field in pattern}
-                loan = {field: pattern[field][2].search(cols[field].get_text()).group(1) for field in pattern}
-                loan['id'] = int(loan['id'])
-#                loan['issue'] = time.strptime(loan['issue'], '%d.%m.%Y')
-                loan['rate'] = float(loan['rate'])
+                cols =  {
+                            field: row.find('td', {'class': pattern[field][1]})
+                                for field in pattern
+                        }
+                loan =  {
+                            field: pattern[field][2].search(cols[field].get_text())
+                                for field in pattern
+                        }
+                loan =  {
+                            field: loan[field].group(1)
+                                for field in pattern
+                                if loan[field] is not None
+                        }
+                loan['id']      = int(loan['id'])
+                loan['issue']   = time.strptime(loan['issue'], '%d.%m.%Y')
+                loan['amount']  = float(loan['amount'])
+                loan['rate']    = float(loan['rate'])
+                loan['term']    = int(loan['term'])
+                if loan.get('term_m'):
+                    loan['term_m'] = int(loan['term_m'])
+                    loan['term'] = loan['term'] + loan['term_m'] * 30 # rounded, acceptable for scoring purposes only
+                    del loan['term_m']
+                loan['available'] = float(loan['available'])
+                if loan['cur'] == '\u20AC':
+                    loan['cur'] = 'EUR'
+                else:
+                    loan['cur'] = None
+#                elif loan['cur'] == '\u10DA': # other ccy not for now...
+#                    loan['cur'] = 'GEL'
                 print(loan)
                 if loan['id'] > self.loan_last:
-                    self.new_loans.append(loan['id'])
+                    self.new_loans.append(loan)
         if len(self.new_loans) > 0:
             self.loan_last = self.new_loans[0]
 
