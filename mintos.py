@@ -24,16 +24,16 @@ class MI:
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        with closing(Chrome(chrome_options=options)) as browser:
-            browser.get(self.host + "/")
-            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
-            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
-            browser.request('POST', self.host + "/login/check", data = payload)
-            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
-            page_source = browser.page_source # store it to string variable
+#        with closing(Chrome(chrome_options=options)) as browser:
+#            browser.get(self.host + "/")
+#            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+#            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
+#            browser.request('POST', self.host + "/login/check", data = payload)
+#            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+#            page_source = browser.page_source # store it to string variable
 # debug
 #        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
-#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
+        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
         soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
@@ -118,11 +118,30 @@ class MI:
                     self.new_loans.append(loan)
         if len(self.new_loans) > 0:
             self.loan_last = self.new_loans[0]['id']
-
         return self.new_loans
+    def runScoring(self):
+        ld = self.data['loandef']['value']
+        for i, loan in enumerate(self.new_loans):
+            if loan['amount'] > ld['amountmax']:
+                self.new_loans[i].update(score=99, message='amount ({}) > amountmax'.format(loan['amount']))#return array(99, 0, 'ZAmount ('.$ct->ZAmount.') > Zmax');
+'''
+	if ($ct->ZAmount - $ct->ZAmount_Ready < Amin) return array(99, 0, 'ZAmount ('.$ct->ZAmount.') - ZAmount_Ready ('.$ct->ZAmount_Ready.') < Amin');
+	if ($ct->Period > Pmax) return array(99, 0, 'Period ('.$ct->Period.') > Pmax');
+	$rate = ($ct->CAmount - $ct->ZAmount) /	$ct->ZAmount / $ct->Period * 365;
+	if ($rate > Rmax) return array(99, 0, 'Rate ('.sprintf("%.2f",$rate).') > Rmax');
+	if ($rate < Rmin) return array(99, 0, 'Rate ('.sprintf("%.2f",$rate).') < Rmin');
 
+	$ad = $t->AttData;
+	if ($ad->AttType < Pers) return array(99, 0, 'AttType ('.$ad->AttType.') < Pers');
+
+	$bl = cwm::getBL($ct->WMID);
+
+	$cs = $t->CreditStatus;
+	if ($cs->State > Smax) return array(99, 0, 'State ('.$cs->State.') > Smax');
+        return
 #            button = browser.find_element_by_name('button')
 #            button.click()
 # wait for the page to load
 #            WebDriverWait(browser, timeout=10).until(
 #                lambda x: x.find_element_by_id('primary-market-table'))
+'''

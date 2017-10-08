@@ -35,6 +35,7 @@ class Runner(MI):
 r = Runner(H)
 try:
     r.getNewLoans()
+    r.runScoring()
     if len(r.new_loans) > 0:
     	print(time.strftime("%Y-%m-%d %H:%M:%S"), len(r.new_loans), [loan['id'] for loan in r.new_loans])
     r.data["status"]["value"]["last"] = r.loan_last
