@@ -121,9 +121,14 @@ class MI:
         return self.new_loans
     def runScoring(self):
         ld = self.data['loandef']['value']
+        fail = 99
         for i, loan in enumerate(self.new_loans):
             if loan['amount'] > ld['amountmax']:
-                self.new_loans[i].update(score=99, message='amount ({}) > amountmax'.format(loan['amount']))#return array(99, 0, 'ZAmount ('.$ct->ZAmount.') > Zmax');
+                self.new_loans[i].update(score = fail, message = 'amount ({}) > amountmax'.format(loan['amount']))
+            elif loan['amount'] < ld['amountmin']:
+                self.new_loans[i].update(score = fail, message = 'amount ({}) < amountmin'.format(loan['amount']))
+            else:
+                self.new_loans[i].update(score = 0, message = 'Ok')
 '''
 	if ($ct->ZAmount - $ct->ZAmount_Ready < Amin) return array(99, 0, 'ZAmount ('.$ct->ZAmount.') - ZAmount_Ready ('.$ct->ZAmount_Ready.') < Amin');
 	if ($ct->Period > Pmax) return array(99, 0, 'Period ('.$ct->Period.') > Pmax');
