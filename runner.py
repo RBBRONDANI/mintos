@@ -13,8 +13,10 @@ class Runner(MI):
     def __init__(self, h):
         super().__init__()
         self.h = h
-        self.data = {"status": {"file": "dat/status.dat", "value": ""}}
-        self.data_load("status")
+        self.data = dict()
+        for var in ['status', 'loandef']:
+            self.data.update({var: {'file': 'dat/{}.dat'.format(var), 'value': ''}})
+            self.data_load(var)
         self.lock()
         self.loan_last = self.data["status"]["value"]["last"]
     def data_sync(self, varname):
@@ -35,9 +37,14 @@ class Runner(MI):
 r = Runner(H)
 try:
     r.getNewLoans()
+    r.runScoring()
     if len(r.new_loans) > 0:
-    	print(time.strftime("%Y-%m-%d %H:%M:%S"), len(r.new_loans), [loan['id'] for loan in r.new_loans])
-    r.data["status"]["value"]["last"] = r.loan_last
+        fail = 99
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / fail {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] == fail])))
+        for loan in r.new_loans:
+            if loan['score'] == fail:
+                print({key: loan[key] for key in ['id', 'amount', 'term', 'rate', 'score', 'message']})
+#    r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:
     for p in psutil.Process().children(recursive=True):

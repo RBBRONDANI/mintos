@@ -118,8 +118,25 @@ class MI:
                     self.new_loans.append(loan)
         if len(self.new_loans) > 0:
             self.loan_last = self.new_loans[0]['id']
-
         return self.new_loans
+    def runScoring(self):
+        ld = self.data['loandef']['value']
+        fail = 99
+        for i, loan in enumerate(self.new_loans):
+            if loan['amount'] > ld['amountmax']:
+                self.new_loans[i].update(score = fail, message = 'amount ({}) > amountmax'.format(loan['amount']))
+            elif loan['amount'] < ld['amountmin']:
+                self.new_loans[i].update(score = fail, message = 'amount ({}) < amountmin'.format(loan['amount']))
+            elif loan['term'] > ld['termmax']:
+                self.new_loans[i].update(score = fail, message = 'term ({}) > termmax'.format(loan['term']))
+            else:
+                rate = loan['rate'] / 100
+                if rate > ld['ratemax']:
+                    self.new_loans[i].update(score = fail, message = 'rate ({}) > ratemax'.format(rate))
+                elif rate < ld['ratemin']:
+                    self.new_loans[i].update(score = fail, message = 'rate ({}) < ratemin'.format(rate))
+                else:
+                    self.new_loans[i].update(score = 0, message = 'Ok')
 
 #            button = browser.find_element_by_name('button')
 #            button.click()
