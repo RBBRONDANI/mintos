@@ -24,16 +24,16 @@ class MI:
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-#        with closing(Chrome(chrome_options=options)) as browser:
-#            browser.get(self.host + "/")
-#            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
-#            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
-#            browser.request('POST', self.host + "/login/check", data = payload)
-#            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
-#            page_source = browser.page_source # store it to string variable
+        with closing(Chrome(chrome_options=options)) as browser:
+            browser.get(self.host + "/")
+            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
+            browser.request('POST', self.host + "/login/check", data = payload)
+            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+            page_source = browser.page_source # store it to string variable
 # debug
 #        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
-        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
+#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
         soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
