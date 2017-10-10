@@ -127,26 +127,19 @@ class MI:
                 self.new_loans[i].update(score = fail, message = 'amount ({}) > amountmax'.format(loan['amount']))
             elif loan['amount'] < ld['amountmin']:
                 self.new_loans[i].update(score = fail, message = 'amount ({}) < amountmin'.format(loan['amount']))
+            elif loan['term'] > ld['termmax']:
+                self.new_loans[i].update(score = fail, message = 'term ({}) > termmax'.format(loan['term']))
             else:
-                self.new_loans[i].update(score = 0, message = 'Ok')
-'''
-	if ($ct->ZAmount - $ct->ZAmount_Ready < Amin) return array(99, 0, 'ZAmount ('.$ct->ZAmount.') - ZAmount_Ready ('.$ct->ZAmount_Ready.') < Amin');
-	if ($ct->Period > Pmax) return array(99, 0, 'Period ('.$ct->Period.') > Pmax');
-	$rate = ($ct->CAmount - $ct->ZAmount) /	$ct->ZAmount / $ct->Period * 365;
-	if ($rate > Rmax) return array(99, 0, 'Rate ('.sprintf("%.2f",$rate).') > Rmax');
-	if ($rate < Rmin) return array(99, 0, 'Rate ('.sprintf("%.2f",$rate).') < Rmin');
+                rate = loan['rate'] / 100
+                if rate > ld['ratemax']:
+                    self.new_loans[i].update(score = fail, message = 'rate ({}) > ratemax'.format(rate))
+                elif rate < ld['ratemin']:
+                    self.new_loans[i].update(score = fail, message = 'rate ({}) < ratemin'.format(rate))
+                else:
+                    self.new_loans[i].update(score = 0, message = 'Ok')
 
-	$ad = $t->AttData;
-	if ($ad->AttType < Pers) return array(99, 0, 'AttType ('.$ad->AttType.') < Pers');
-
-	$bl = cwm::getBL($ct->WMID);
-
-	$cs = $t->CreditStatus;
-	if ($cs->State > Smax) return array(99, 0, 'State ('.$cs->State.') > Smax');
-        return
 #            button = browser.find_element_by_name('button')
 #            button.click()
 # wait for the page to load
 #            WebDriverWait(browser, timeout=10).until(
 #                lambda x: x.find_element_by_id('primary-market-table'))
-'''

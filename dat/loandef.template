@@ -1,4 +1,7 @@
 {
-    "amountmax": 100,
-    "amountmin": 20
+    "amountmax": 0,
+    "amountmin": 0,
+    "termmax": 0,
+    "ratemax": 0,
+    "ratemin": 0
 }
