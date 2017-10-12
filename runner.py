@@ -40,10 +40,10 @@ try:
     r.runScoring()
     if len(r.new_loans) > 0:
         fail = 99
-        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / fail {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] == fail])))
-        for loan in r.new_loans:
-            if loan['score'] == fail:
-                print({key: loan[key] for key in ['id', 'amount', 'term', 'rate', 'score', 'message']})
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] != fail])))
+#        for loan in r.new_loans:
+#            if loan['score'] == fail:
+#                print({key: loan[key] for key in ['id', 'amount', 'term', 'rate', 'score', 'message']})
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:
