@@ -26,7 +26,7 @@ class Runner(MI):
         self.data[varname]["value"] = json.loads(open(self.h + self.data[varname]["file"]).read())
     def lock(self):
         if self.data["status"]["value"]["lock"] == 1:
-            self.ts_exit("System is locked")
+            self.ts_exit("system is locked")
         else:
             self.data["status"]["value"]["lock"] = 1
             self.data_sync("status")
