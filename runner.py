@@ -26,7 +26,7 @@ class Runner(MI):
         self.data[varname]["value"] = json.loads(open(self.h + self.data[varname]["file"]).read())
     def lock(self):
         if self.data["status"]["value"]["lock"] == 1:
-            self.ts_exit("System is locked")
+            self.ts_exit("system is locked")
         else:
             self.data["status"]["value"]["lock"] = 1
             self.data_sync("status")
@@ -40,10 +40,11 @@ try:
     r.runScoring()
     if len(r.new_loans) > 0:
         fail = 99
-        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / fail {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] == fail])))
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] != fail])))
         for loan in r.new_loans:
-            if loan['score'] == fail:
-                print({key: loan[key] for key in ['id', 'amount', 'term', 'rate', 'score', 'message']})
+            if loan['score'] != fail:
+                r.acceptLoans(loan['id'])
+                break
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:

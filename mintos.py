@@ -137,6 +137,23 @@ class MI:
                     self.new_loans[i].update(score = fail, message = 'rate ({}) < ratemin'.format(rate))
                 else:
                     self.new_loans[i].update(score = 0, message = 'Ok')
+    def acceptLoans(self, loan):
+        options = webdriver.ChromeOptions()
+        options.add_argument('headless')
+        with closing(Chrome(chrome_options=options)) as browser:
+            browser.get(self.host + "/")
+            token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
+            payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
+            browser.request('POST', self.host + "/login/check", data = payload)
+            browser.get("{}/{}-01".format(self.host, loan))
+            page_source = browser.page_source # store it to string variable
+# debug
+        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
+#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
+#        soup = bs(page_source, "html.parser") # response parsing
+#        rows = soup.find('table', {'id': 'primary-market-table'})
+#        if rows is not None:
+#            rows = rows.find('tbody').find_all('tr')
 
 #            button = browser.find_element_by_name('button')
 #            button.click()
