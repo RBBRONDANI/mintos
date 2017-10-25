@@ -38,15 +38,15 @@ r = Runner(H)
 try:
     r.getNewLoans()
     r.runScoring()
-    if len(r.new_loans) > 0:
+    if len(r.new_loans) >= 0:
         fail = 99
         print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] != fail])))
         for loan in r.new_loans:
             if loan['score'] != fail:
                 r.acceptLoans(loan['id'])
                 break
-    r.data["status"]["value"]["last"] = r.loan_last
-    r.data_sync("status")
+#    r.data["status"]["value"]["last"] = r.loan_last
+#    r.data_sync("status")
 finally:
     for p in psutil.Process().children(recursive=True):
         p.kill()

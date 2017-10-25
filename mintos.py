@@ -8,31 +8,41 @@ from bs4 import BeautifulSoup as bs
 from contextlib import closing
 from selenium import webdriver
 from seleniumrequests import Chrome
-#from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
 #from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from pdb import set_trace as bp
 
 class MI:
+
     def __init__(self):
         self.host = "https://www.mintos.com/en"
         self.user = os.environ['MINTOS_USER'] # export MINTOS_USER=mintosuser
         self.passwd = os.environ['MINTOS_PASS'] # export MINTOS_PASS=secret
         self.new_loans = []
         self.loan_last = 0
+        self.timeout = 10 # load page timeout in seconds
+
     def ts_exit(self, msg):
         sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
+
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        with closing(Chrome(chrome_options=options)) as browser:
+        with closing(Chrome(chrome_options = options)) as browser:
             browser.get(self.host + "/")
+            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_name('_csrf_token'))
+            codecs.open('tmp/dump_root', 'w', encoding='utf-8').write(browser.page_source)
             token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
             payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
             browser.request('POST', self.host + "/login/check", data = payload)
+            time.sleep(5)
+            codecs.open('tmp/dump_post', 'w', encoding='utf-8').write(browser.page_source)
+#            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_id('header-username'))
             browser.get(self.host + "/available-loans/primary-market/?currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1")
+            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_id('primary-market-table'))
             page_source = browser.page_source # store it to string variable
 # debug
-#        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
+        codecs.open('tmp/dump', 'w', encoding='utf-8').write(page_source)
 #        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
         soup = bs(page_source, "html.parser") # response parsing
         # find primary market table
@@ -119,6 +129,7 @@ class MI:
         if len(self.new_loans) > 0:
             self.loan_last = self.new_loans[0]['id']
         return self.new_loans
+
     def runScoring(self):
         ld = self.data['loandef']['value']
         fail = 99
@@ -137,6 +148,7 @@ class MI:
                     self.new_loans[i].update(score = fail, message = 'rate ({}) < ratemin'.format(rate))
                 else:
                     self.new_loans[i].update(score = 0, message = 'Ok')
+
     def acceptLoans(self, loan):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
@@ -148,7 +160,7 @@ class MI:
             browser.get("{}/{}-01".format(self.host, loan))
             page_source = browser.page_source # store it to string variable
 # debug
-        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
+        codecs.open('tmp/dump_accept', 'w', encoding='utf-8').write(page_source)
 #        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
 #        soup = bs(page_source, "html.parser") # response parsing
 #        rows = soup.find('table', {'id': 'primary-market-table'})
