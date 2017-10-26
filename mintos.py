@@ -29,7 +29,7 @@ class MI:
             token = bs(browser.page_source, "html.parser").find('input', {'name': '_csrf_token'})['value']
             payload = {"_csrf_token": token, "_username": self.user, "_password": self.passwd}
             browser.request('POST', self.host + "/login/check", data = payload)
-            browser.get(self.host + "/available-loans/primary-market/?sort_field=id&sort_order=DESC&max_results=100&page=1")
+            browser.get(self.host + "/available-loans/primary-market/?currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1")
             page_source = browser.page_source # store it to string variable
 # debug
 #        codecs.open('tmp/dump.html', 'w', encoding='utf-8').write(page_source)
