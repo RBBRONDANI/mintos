@@ -7,6 +7,9 @@ from bs4 import BeautifulSoup as bs
 from contextlib import closing
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from pdb import set_trace as bp
 
 class MI:
@@ -17,7 +20,6 @@ class MI:
         self.passwd = os.environ['MINTOS_PASS'] # export MINTOS_PASS=secret
         self.new_loans = []
         self.loan_last = 0
-        self.timeout = 10 # load page timeout in seconds
 
     def ts_exit(self, msg):
         sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
@@ -25,24 +27,23 @@ class MI:
     def getNewLoans(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
+        ld = self.data['loandef']['value']
         with closing(webdriver.Chrome(chrome_options = options)) as browser:
             browser.get(self.host + "/")
-            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_name('MyAccountButton'))
-            button = browser.find_element_by_name('MyAccountButton')
-            button.click()
-            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_name('_username'))
-            username = browser.find_element_by_name('_username')
-            username.clear()
+            wait = WebDriverWait(browser, timeout = 10) # seconds
+            account = wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
+            account.click()
+            time.sleep(1) # workaround: javascript needs to be loaded
+            username = wait.until(EC.presence_of_element_located((By.NAME, '_username')))
             username.send_keys(self.user)
-            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_name('_password'))
             password = browser.find_element_by_name('_password')
-            password.clear()
             password.send_keys(self.passwd)
             form = browser.find_element_by_id('login-form')
             form.submit()
-            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_id('header-username'))
-            browser.get(self.host + "/available-loans/primary-market/?currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1")
-            WebDriverWait(browser, timeout = self.timeout).until(lambda x: x.find_element_by_id('primary-market-table'))
+            wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
+            browser.get(self.host + "/available-loans/primary-market/?min_interest={}&max_interest={}&currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1"
+                .format(ld['ratemin'] * 100, ld['ratemin'] * 100))
+            wait.until(EC.presence_of_element_located((By.ID, 'primary-market-table')))
             page_source = browser.page_source # store it to string variable
 # debug
 #        codecs.open('tmp/dump', 'w', encoding='utf-8').write(page_source)
