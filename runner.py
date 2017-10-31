@@ -53,6 +53,5 @@ try:
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:
-    for p in psutil.Process().children(recursive=True):
-        p.kill()
+    r.Quit()
     r.ulock()
