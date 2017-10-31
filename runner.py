@@ -36,18 +36,22 @@ class Runner(MI):
 
 r = Runner(H)
 try:
+    r.logIn()
     r.getNewLoans()
     r.runScoring()
-    r.acceptLoans(1110801)#1764383)#1497849)
     if len(r.new_loans) > 0:
         fail = 99
         print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] != fail])))
+        i = 0
         for loan in r.new_loans:
-            if False:#loan['score'] != fail:
+            if loan['score'] != fail:
                 r.acceptLoans(loan['id'])
-                break
-#    r.data["status"]["value"]["last"] = r.loan_last
-#    r.data_sync("status")
+                i += 1
+                if i >= r.data['loandef']['value']['acceptcnt']:
+                    break
+#    r.checkOut()
+    r.data["status"]["value"]["last"] = r.loan_last
+    r.data_sync("status")
 finally:
     for p in psutil.Process().children(recursive=True):
         p.kill()

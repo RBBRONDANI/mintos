@@ -10,6 +10,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from urllib.parse import urlencode
 from pdb import set_trace as bp
 
 class MI:
@@ -24,31 +26,54 @@ class MI:
     def ts_exit(self, msg):
         sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
 
-    def getNewLoans(self):
+    def logIn(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
+        self.browser = webdriver.Chrome(chrome_options = options)
+        self.browser.get(self.host + "/")
+        self.wait = WebDriverWait(self.browser, timeout = 10) # seconds
+        account = self.wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
+        account.click()
+        time.sleep(1) # workaround: javascript needs to be loaded
+        username = self.wait.until(EC.presence_of_element_located((By.NAME, '_username')))
+        username.send_keys(self.user)
+        password = self.browser.find_element_by_name('_password')
+        password.send_keys(self.passwd)
+        form = self.browser.find_element_by_id('login-form')
+        form.submit()
+        header = self.wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
+        return header.text
+
+    def getNewLoans(self):
         ld = self.data['loandef']['value']
-        with closing(webdriver.Chrome(chrome_options = options)) as browser:
-            browser.get(self.host + "/")
-            wait = WebDriverWait(browser, timeout = 10) # seconds
-            account = wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
-            account.click()
-            time.sleep(1) # workaround: javascript needs to be loaded
-            username = wait.until(EC.presence_of_element_located((By.NAME, '_username')))
-            username.send_keys(self.user)
-            password = browser.find_element_by_name('_password')
-            password.send_keys(self.passwd)
-            form = browser.find_element_by_id('login-form')
-            form.submit()
-            wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
-            browser.get(self.host + "/available-loans/primary-market/?min_interest={}&max_interest={}&currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1"
-                .format(ld['ratemin'] * 100, ld['ratemin'] * 100))
-            wait.until(EC.presence_of_element_located((By.ID, 'primary-market-table')))
-            page_source = browser.page_source # store it to string variable
+#        self.browser.get(self.host + "/")
+#        wait = WebDriverWait(self.browser, timeout = 10) # seconds
+#        account = wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
+#        account.click()
+#        time.sleep(1) # workaround: javascript needs to be loaded
+#        username = wait.until(EC.presence_of_element_located((By.NAME, '_username')))
+#        username.send_keys(self.user)
+#        password = self.browser.find_element_by_name('_password')
+#        password.send_keys(self.passwd)
+#        form = self.browser.find_element_by_id('login-form')
+#        form.submit()
+#        wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
+        query = {
+            'min_interest':   ld['ratemin'] * 100,
+            'max_interest':   ld['ratemax'] * 100,
+            'min_term':       0,
+            'max_term':       ld['termmax'],
+            'currencies[]':   978,
+            'sort_field':     'id',
+            'sort_order':     'DESC',
+            'max_results':    100,
+            'page':           1
+        }
+        self.browser.get(self.host + "/available-loans/primary-market/?" + urlencode(query))
+        self.wait.until(EC.presence_of_element_located((By.ID, 'primary-market-table')))
 # debug
-#        codecs.open('tmp/dump', 'w', encoding='utf-8').write(page_source)
-#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
-        soup = bs(page_source, "html.parser") # response parsing
+#        codecs.open('tmp/dump', 'w', encoding='utf-8').write(self.browser.page_source)
+        soup = bs(self.browser.page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
         if rows is not None:
@@ -154,51 +179,60 @@ class MI:
                     self.new_loans[i].update(score = 0, message = 'Ok')
 
     def acceptLoans(self, loan):
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
         ld = self.data['loandef']['value']
-        with closing(webdriver.Chrome(chrome_options = options)) as browser:
-            browser.get(self.host + "/")
-            wait = WebDriverWait(browser, timeout = 10) # seconds
-            account = wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
-            account.click()
+        self.browser.get("{}/{}-01".format(self.host, loan))
+        investment = self.wait.until(EC.presence_of_element_located((By.ID, 'investment-tab')))
+        investment.click()
+        table = self.wait.until(EC.presence_of_element_located((By.ID, 'investment-group-table')))
+        percent = re.compile('(-*\d+\.\d+)%')
+        imin = 0
+        pmin = 100
+        cnt = len(table.find_elements_by_xpath('./tbody/tr'))
+        if cnt >= 3:
+            cnt = 3
+        for i in range(2, cnt + 1):
+            row = table.find_element_by_xpath('./tbody/tr[{}]'.format(i))
+            discount = row.find_element_by_xpath('./td[5]').text
+#            print(i, discount, loan)
+#            print(row.get_attribute('innerHTML'))
+            if len(discount) > 0 and self.isElementExist(row, './td[7]/div'):
+                p = float(percent.search(discount).group(1))
+                if p < pmin:
+                    pmin = p
+                    imin = i
+        if imin == 0:
+            print('Cannot find invest line')
+        else:
+            div = table.find_element_by_xpath('./tbody/tr[{}]/td[7]/div'.format(imin))
+            print(imin, pmin, loan, 'data-hash:', div.get_attribute('data-hash'))
+            button = div.find_element_by_xpath('./button')
+            fillin = div.find_element_by_xpath('./input')
+            case = div.find_element_by_xpath('./a[@class="btn btn-primary trigger-submit"]')
+            button.send_keys(Keys.SPACE)
+            amount = re.compile('\u20AC (\d+\.\d+)') # Euro only
+            value = float(amount.search(fillin.get_attribute('value')).group(1))
+            if value > ld['acceptmax']:
+                fillin.send_keys(ld['acceptmax'])
+            fillin.send_keys(Keys.TAB)
+            case.click()
             time.sleep(1) # workaround: javascript needs to be loaded
-            username = wait.until(EC.presence_of_element_located((By.NAME, '_username')))
-            username.send_keys(self.user)
-            password = browser.find_element_by_name('_password')
-            password.send_keys(self.passwd)
-            form = browser.find_element_by_id('login-form')
-            form.submit()
-            wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
-            browser.get("{}/{}-01".format(self.host, loan))
-            investment = wait.until(EC.presence_of_element_located((By.ID, 'investment-tab')))
-            investment.click()
-            table = wait.until(EC.presence_of_element_located((By.ID, 'investment-group-table')))
-            row2 = table.find_element_by_xpath('./tbody/tr[2]')
-            row3 = table.find_element_by_xpath('./tbody/tr[3]')
-            percent = re.compile('(-*\d+\.\d+)%')
-            imin = 0
-            pmin = 100
-            for i in range(2, 4):
-#                print(i)
-                row = table.find_element_by_xpath('./tbody/tr[{}]'.format(i))
-                td5 = row.find_element_by_xpath('./td[5]').text
-#                print(td5, len(td5))
-                if len(td5) > 0:
-                    p = float(percent.search(td5).group(1))
-                    if p < pmin:
-                        pmin = p
-                        imin = i
-            print(imin, pmin, table.find_element_by_xpath('./tbody/tr[{}]/td[7]/div'.format(imin)).get_attribute('data-hash'));
-#            print(table.find_element_by_xpath('./tbody/tr[{}]/td[7]/div'.format(imin)).get_attribute('innerHTML'))
-#            row1 = wait.until(EC.presence_of_element_located((By.XPATH, '//table[@id="investment-group-table"]/tbody/tr[2]/td[5]')))
-#            row2 = wait.until(EC.presence_of_element_located((By.XPATH, '//table[@id="investment-group-table"]/tbody/tr[2]/td[5]')))
-#            codecs.open('tmp/dump_accept', 'w', encoding='utf-8').write(row2.get_attribute('innerHTML'))
-#            browser.get(self.host + "/available-loans/primary-market/?min_interest={}&max_interest={}&currencies[]=978&sort_field=id&sort_order=DESC&max_results=100&page=1"
-#                .format(ld['ratemin'] * 100, ld['ratemin'] * 100))
-#            wait.until(EC.presence_of_element_located((By.ID, 'primary-market-table')))
-#            page_source = browser.page_source # store it to string variable
 # debug
-#        codecs.open('tmp/dump_accept', 'w', encoding='utf-8').write(page_source)
-#        page_source = codecs.open('tmp/dump.html', 'r', encoding='utf-8').read()
+#        codecs.open('tmp/dump_accept', 'w', encoding='utf-8').write(self.browser.page_source)
+        return True
+
+    def isElementExist(self, parent, locator):
+        try:
+            parent.find_element_by_xpath(locator)
+        except NoSuchElementException:
+            print('No such thing: {}'.format(locator))
+            return False
+        return True
+
+    def checkOut(self):
+        self.browser.get("{}/review-investments/".format(self.host))
+        confirm = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'form-horizontal')))
+        confirm.submit()
+        time.sleep(1) # workaround: javascript needs to be loaded
+# debug
+#        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
         return True
