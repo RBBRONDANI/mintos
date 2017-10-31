@@ -46,18 +46,6 @@ class MI:
 
     def getNewLoans(self):
         ld = self.data['loandef']['value']
-#        self.browser.get(self.host + "/")
-#        wait = WebDriverWait(self.browser, timeout = 10) # seconds
-#        account = wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
-#        account.click()
-#        time.sleep(1) # workaround: javascript needs to be loaded
-#        username = wait.until(EC.presence_of_element_located((By.NAME, '_username')))
-#        username.send_keys(self.user)
-#        password = self.browser.find_element_by_name('_password')
-#        password.send_keys(self.passwd)
-#        form = self.browser.find_element_by_id('login-form')
-#        form.submit()
-#        wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
         query = {
             'min_interest':   ld['ratemin'] * 100,
             'max_interest':   ld['ratemax'] * 100,
@@ -193,8 +181,6 @@ class MI:
         for i in range(2, cnt + 1):
             row = table.find_element_by_xpath('./tbody/tr[{}]'.format(i))
             discount = row.find_element_by_xpath('./td[5]').text
-#            print(i, discount, loan)
-#            print(row.get_attribute('innerHTML'))
             if len(discount) > 0 and self.isElementExist(row, './td[7]/div'):
                 p = float(percent.search(discount).group(1))
                 if p < pmin:
@@ -216,8 +202,6 @@ class MI:
             fillin.send_keys(Keys.TAB)
             case.click()
             time.sleep(1) # workaround: javascript needs to be loaded
-# debug
-#        codecs.open('tmp/dump_accept', 'w', encoding='utf-8').write(self.browser.page_source)
         return True
 
     def isElementExist(self, parent, locator):
