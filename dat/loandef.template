@@ -3,5 +3,7 @@
     "amountmin": 0,
     "termmax": 0,
     "ratemax": 0,
-    "ratemin": 0
+    "ratemin": 0,
+    "acceptmax": 0,
+    "acceptcnt": 0
 }
