@@ -220,3 +220,6 @@ class MI:
 # debug
 #        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
         return True
+
+    def Quit(self):
+        self.browser.quit()
