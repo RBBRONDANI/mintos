@@ -49,21 +49,24 @@ try:
     r.runScoring()
     if len(r.new_loans) > 0:
         fail = 99
+        accepted = 10
         i = 0
-        for loan in r.new_loans:
-            r.logging(loan['id'], loan['cur'], loan['amount'], loan['available'], loan['term'], loan['message'])
+        for k, loan in enumerate(r.new_loans):
             if loan['score'] != fail:
                 i += 1
                 if i > r.data['loandef']['value']['acceptcnt']:
                     break
                 r.acceptLoans(loan['id'])
-        accepted = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
+                r.new_loans[k].update(score = accepted, message = 'accepted')
+            r.logging(loan['id'], loan['cur'], loan['amount'], loan['available'], loan['term'], loan['score'], loan['message'])
+        success = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
+        basket = len([loan['id'] for loan in r.new_loans if loan['score'] == accepted])
         checkout = ['', '']
-        if accepted > 0:
+        if basket > 0:
             checkout = r.checkOut()
             r.logging(checkout)
         print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {} / {}: {}'.format(
-            r.new_loans[0]['id'] - r.loan_last, accepted, checkout[0], '')) # checkout[1]
+            r.new_loans[0]['id'] - r.loan_last, success, checkout[0], '')) # checkout[1]
         r.loan_last = r.new_loans[0]['id']
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
