@@ -53,10 +53,10 @@ try:
         for loan in r.new_loans:
             r.logging(loan['id'], loan['cur'], loan['amount'], loan['available'], loan['term'], loan['message'])
             if loan['score'] != fail:
-                r.acceptLoans(loan['id'])
                 i += 1
-                if i >= r.data['loandef']['value']['acceptcnt']:
+                if i > r.data['loandef']['value']['acceptcnt']:
                     break
+                r.acceptLoans(loan['id'])
         accepted = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
         checkout = ['', '']
         if accepted > 0:
