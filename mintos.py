@@ -80,7 +80,7 @@ class MI:
                                 'm-loan-type',
                             ],
                   'amount': [
-                                r'(\d+\.\d+|\d+)',
+                                r'. (\d+\s*\d*\.*\d*)',
                                 'global-align-right m-loan-amount m-labeled-col',
                             ],
                     'rate': [
@@ -96,11 +96,11 @@ class MI:
                                 'global-align-right m-loan-term m-labeled-col',
                             ],
                'available': [
-                                r'(\d+\.\d+|\d+)',
+                                r'. (\d+\s*\d*\.*\d*)',
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                      'cur': [
-                                r'(.) \d+',
+                                r'(.) \d+\s*\d*',
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                   }
@@ -127,14 +127,14 @@ class MI:
                         }
                 loan['id']      = int(loan['id'])
                 loan['issue']   = time.strptime(loan['issue'], '%d.%m.%Y')
-                loan['amount']  = float(loan['amount'])
+                loan['amount']  = float(loan['amount'].replace(' ', ''))
                 loan['rate']    = float(loan['rate'])
                 loan['term']    = int(loan['term'])
                 if loan.get('term_m'):
                     loan['term_m'] = int(loan['term_m'])
                     loan['term'] = loan['term'] + loan['term_m'] * 30 # rounded, acceptable for scoring purposes only
                     del loan['term_m']
-                loan['available'] = float(loan['available'])
+                loan['available'] = float(loan['available'].replace(' ', ''))
                 if loan['cur'] == '\u20AC':
                     loan['cur'] = 'EUR'
                 else:
@@ -142,9 +142,10 @@ class MI:
 #                elif loan['cur'] == '\u10DA': # other ccy not for now...
 #                    loan['cur'] = 'GEL'
                 if loan['id'] > self.loan_last:
-                    self.new_loans.append(loan)
-        if len(self.new_loans) > 0:
-            self.loan_last = self.new_loans[0]['id']
+                    if (loan['id'] - self.loan_last) % ld['acceptskip'] == 0:
+                        self.new_loans.append(loan)
+                else:
+                    break
         return self.new_loans
 
     def runScoring(self):
@@ -190,12 +191,12 @@ class MI:
             print('Cannot find invest line')
         else:
             div = table.find_element_by_xpath('./tbody/tr[{}]/td[7]/div'.format(imin))
-            print(imin, pmin, loan, 'data-hash:', div.get_attribute('data-hash'))
+            self.logging(imin, pmin, loan, 'data-hash:', div.get_attribute('data-hash'))
             button = div.find_element_by_xpath('./button')
             fillin = div.find_element_by_xpath('./input')
             case = div.find_element_by_xpath('./a[@class="btn btn-primary trigger-submit"]')
             button.send_keys(Keys.SPACE)
-            amount = re.compile('\u20AC (\d+\.\d+)') # Euro only
+            amount = re.compile('\u20AC (\d+\.\d+)') # euro only
             value = float(amount.search(fillin.get_attribute('value')).group(1))
             if value > ld['acceptmax']:
                 fillin.send_keys(ld['acceptmax'])
@@ -208,7 +209,7 @@ class MI:
         try:
             parent.find_element_by_xpath(locator)
         except NoSuchElementException:
-            print('No such thing: {}'.format(locator))
+            self.logging('No such thing: {}'.format(locator))
             return False
         return True
 
@@ -217,9 +218,20 @@ class MI:
         confirm = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'form-horizontal')))
         confirm.submit()
         time.sleep(1) # workaround: javascript needs to be loaded
-# debug
-#        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
-        return True
+        if self.debug:
+            codecs.open('tmp/dump_checkout', 'w', encoding='utf-8').write(self.browser.page_source)
+        if self.isElementExist(self.browser, '//div[@id="investment-review"]'):
+            message = self.browser.find_element_by_xpath('//div[@id="investment-review"]/h1').text
+            if message == "Thank you! Your investments have been approved.":
+                return ['approved', message]
+        if self.isElementExist(self.browser, '//div[@class="common-error pull-right"]'):
+            message = self.browser.find_element_by_xpath('//div[@class="common-error pull-right"]').text
+            return ['error', message]
+        return ['error', 'unable to parse result']
 
     def Quit(self):
         self.browser.quit()
+
+    def logging(self, *args):
+        if self.debug:
+            print(args)
