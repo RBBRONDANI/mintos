@@ -80,7 +80,7 @@ class MI:
                                 'm-loan-type',
                             ],
                   'amount': [
-                                r'(\d+\.\d+|\d+)',
+                                r'. (\d+\s*\d*\.*\d*)',
                                 'global-align-right m-loan-amount m-labeled-col',
                             ],
                     'rate': [
@@ -96,11 +96,11 @@ class MI:
                                 'global-align-right m-loan-term m-labeled-col',
                             ],
                'available': [
-                                r'(\d+\.\d+|\d+)',
+                                r'. (\d+\s*\d*\.*\d*)',
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                      'cur': [
-                                r'(.) \d+',
+                                r'(.) \d+\s*\d*',
                                 'global-align-right m-labeled-col mod-highlighted',
                             ],
                   }
@@ -127,14 +127,14 @@ class MI:
                         }
                 loan['id']      = int(loan['id'])
                 loan['issue']   = time.strptime(loan['issue'], '%d.%m.%Y')
-                loan['amount']  = float(loan['amount'])
+                loan['amount']  = float(loan['amount'].replace(' ', ''))
                 loan['rate']    = float(loan['rate'])
                 loan['term']    = int(loan['term'])
                 if loan.get('term_m'):
                     loan['term_m'] = int(loan['term_m'])
                     loan['term'] = loan['term'] + loan['term_m'] * 30 # rounded, acceptable for scoring purposes only
                     del loan['term_m']
-                loan['available'] = float(loan['available'])
+                loan['available'] = float(loan['available'].replace(' ', ''))
                 if loan['cur'] == '\u20AC':
                     loan['cur'] = 'EUR'
                 else:
@@ -218,8 +218,12 @@ class MI:
         confirm.submit()
         time.sleep(1) # workaround: javascript needs to be loaded
 # debug
-#        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
+        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
         return True
 
     def Quit(self):
         self.browser.quit()
+
+    def logging(self, *args):
+        if self.debug:
+            print(args)
