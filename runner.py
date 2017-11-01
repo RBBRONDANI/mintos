@@ -58,11 +58,13 @@ try:
                 if i >= r.data['loandef']['value']['acceptcnt']:
                     break
         accepted = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
+        checkout = ['', '']
         if accepted > 0:
             checkout = r.checkOut()
             r.logging(checkout)
         print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {} / {}: {}'.format(
-            len(r.new_loans), accepted, checkout[0], checkout[1]))
+            r.new_loans[0]['id'] - r.loan_last, accepted, checkout[0], '')) # checkout[1]
+        r.loan_last = r.new_loans[0]['id']
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:

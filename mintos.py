@@ -142,9 +142,10 @@ class MI:
 #                elif loan['cur'] == '\u10DA': # other ccy not for now...
 #                    loan['cur'] = 'GEL'
                 if loan['id'] > self.loan_last:
-                    self.new_loans.append(loan)
-        if len(self.new_loans) > 0:
-            self.loan_last = self.new_loans[0]['id']
+                    if (loan['id'] - self.loan_last) % ld['acceptskip'] == 0:
+                        self.new_loans.append(loan)
+                else:
+                    break
         return self.new_loans
 
     def runScoring(self):
