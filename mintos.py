@@ -190,12 +190,12 @@ class MI:
             print('Cannot find invest line')
         else:
             div = table.find_element_by_xpath('./tbody/tr[{}]/td[7]/div'.format(imin))
-            print(imin, pmin, loan, 'data-hash:', div.get_attribute('data-hash'))
+            self.logging(imin, pmin, loan, 'data-hash:', div.get_attribute('data-hash'))
             button = div.find_element_by_xpath('./button')
             fillin = div.find_element_by_xpath('./input')
             case = div.find_element_by_xpath('./a[@class="btn btn-primary trigger-submit"]')
             button.send_keys(Keys.SPACE)
-            amount = re.compile('\u20AC (\d+\.\d+)') # Euro only
+            amount = re.compile('\u20AC (\d+\.\d+)') # euro only
             value = float(amount.search(fillin.get_attribute('value')).group(1))
             if value > ld['acceptmax']:
                 fillin.send_keys(ld['acceptmax'])
@@ -208,7 +208,7 @@ class MI:
         try:
             parent.find_element_by_xpath(locator)
         except NoSuchElementException:
-            print('No such thing: {}'.format(locator))
+            self.logging('No such thing: {}'.format(locator))
             return False
         return True
 
@@ -217,9 +217,16 @@ class MI:
         confirm = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'form-horizontal')))
         confirm.submit()
         time.sleep(1) # workaround: javascript needs to be loaded
-# debug
-        codecs.open('tmp/dump_confirm', 'w', encoding='utf-8').write(self.browser.page_source)
-        return True
+        if self.debug:
+            codecs.open('tmp/dump_checkout', 'w', encoding='utf-8').write(self.browser.page_source)
+        if self.isElementExist(self.browser, '//div[@id="investment-review"]'):
+            message = self.browser.find_element_by_xpath('//div[@id="investment-review"]/h1').text
+            if message == "Thank you! Your investments have been approved.":
+                return ['approved', message]
+        if self.isElementExist(self.browser, '//div[@class="common-error pull-right"]'):
+            message = self.browser.find_element_by_xpath('//div[@class="common-error pull-right"]').text
+            return ['error', message]
+        return ['error', 'unable to parse result']
 
     def Quit(self):
         self.browser.quit()

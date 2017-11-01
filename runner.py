@@ -49,7 +49,6 @@ try:
     r.runScoring()
     if len(r.new_loans) > 0:
         fail = 99
-        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {}'.format(len(r.new_loans), len([loan['id'] for loan in r.new_loans if loan['score'] != fail])))
         i = 0
         for loan in r.new_loans:
             r.logging(loan['id'], loan['cur'], loan['amount'], loan['available'], loan['term'], loan['message'])
@@ -58,7 +57,12 @@ try:
                 i += 1
                 if i >= r.data['loandef']['value']['acceptcnt']:
                     break
-#    r.checkOut()
+        accepted = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
+        if accepted > 0:
+            checkout = r.checkOut()
+            r.logging(checkout)
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {} / {}: {}'.format(
+            len(r.new_loans), accepted, checkout[0], checkout[1]))
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
 finally:
