@@ -23,6 +23,7 @@ class Runner(MI):
             self.debug = True
         else:
             self.debug = False
+        self.logging(time.strftime("%Y-%m-%d %H:%M:%S"), "init")
 
     def data_sync(self, varname):
         j = json.dumps(self.data[varname]["value"], sort_keys=True, indent=4)#separators=(',',':')
