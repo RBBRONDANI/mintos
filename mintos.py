@@ -23,26 +23,32 @@ class MI:
         self.new_loans = []
         self.loan_last = 0
 
-    def ts_exit(self, msg):
-        sys.exit(time.strftime("%Y-%m-%d %H:%M:%S ") + str(msg))
-
     def logIn(self):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         self.browser = webdriver.Chrome(chrome_options = options)
         self.browser.get(self.host + "/")
         self.wait = WebDriverWait(self.browser, timeout = 10) # seconds
-        account = self.wait.until(EC.presence_of_element_located((By.NAME, 'MyAccountButton')))
+        account = self.getElement(By.NAME, 'MyAccountButton')
         account.click()
         time.sleep(1) # workaround: javascript needs to be loaded
-        username = self.wait.until(EC.presence_of_element_located((By.NAME, '_username')))
+        username = self.getElement(By.NAME, '_username')
         username.send_keys(self.user)
         password = self.browser.find_element_by_name('_password')
         password.send_keys(self.passwd)
         form = self.browser.find_element_by_id('login-form')
         form.submit()
-        header = self.wait.until(EC.presence_of_element_located((By.ID, 'header-username')))
+        header = self.getElement(By.ID, 'header-username')
+        self.logging('logIn', header.text)
         return header.text
+
+    def getElement(self, by, name):
+        try:
+            return self.wait.until(EC.presence_of_element_located((by, name)))
+        except:
+            if self.debug:
+                codecs.open('tmp/dump', 'w', encoding='utf-8').write(self.browser.page_source)
+            raise
 
     def getNewLoans(self):
         ld = self.data['loandef']['value']
@@ -58,9 +64,7 @@ class MI:
             'page':           1
         }
         self.browser.get(self.host + "/available-loans/primary-market/?" + urlencode(query))
-        self.wait.until(EC.presence_of_element_located((By.ID, 'primary-market-table')))
-# debug
-#        codecs.open('tmp/dump', 'w', encoding='utf-8').write(self.browser.page_source)
+        self.getElement(By.ID, 'primary-market-table')
         soup = bs(self.browser.page_source, "html.parser") # response parsing
         # find primary market table
         rows = soup.find('table', {'id': 'primary-market-table'})
@@ -146,6 +150,7 @@ class MI:
                         self.new_loans.append(loan)
                 else:
                     break
+        self.logging('newLoans', len(self.new_loans))
         return self.new_loans
 
     def runScoring(self):
@@ -166,13 +171,14 @@ class MI:
                     self.new_loans[i].update(score = fail, message = 'rate ({}) < ratemin'.format(rate))
                 else:
                     self.new_loans[i].update(score = 0, message = 'Ok')
+        self.logging('runScoring', 'done')
 
     def acceptLoans(self, loan):
         ld = self.data['loandef']['value']
         self.browser.get("{}/{}-01".format(self.host, loan))
-        investment = self.wait.until(EC.presence_of_element_located((By.ID, 'investment-tab')))
+        investment = self.getElement(By.ID, 'investment-tab')
         investment.click()
-        table = self.wait.until(EC.presence_of_element_located((By.ID, 'investment-group-table')))
+        table = self.getElement(By.ID, 'investment-group-table')
         percent = re.compile('(-*\d+\.\d+)%')
         imin = 0
         pmin = 100
@@ -215,7 +221,7 @@ class MI:
 
     def checkOut(self):
         self.browser.get("{}/review-investments/".format(self.host))
-        confirm = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'form-horizontal')))
+        confirm = self.getElement(By.CLASS_NAME, 'form-horizontal')
         confirm.submit()
         time.sleep(1) # workaround: javascript needs to be loaded
         if self.debug:
