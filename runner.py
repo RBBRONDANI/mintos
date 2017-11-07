@@ -67,7 +67,7 @@ try:
             checkout = r.checkOut()
             r.logging(checkout)
         print(time.strftime("%Y-%m-%d %H:%M:%S"), '{} / success {} / {}: {}'.format(
-            r.new_loans[0]['id'] - r.loan_last, success, checkout[0], '')) # checkout[1]
+            r.new_loans[0]['id'] - r.loan_last, success, checkout[0], checkout[1]))
         r.loan_last = r.new_loans[0]['id']
     r.data["status"]["value"]["last"] = r.loan_last
     r.data_sync("status")
