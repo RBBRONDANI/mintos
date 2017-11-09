@@ -59,6 +59,7 @@ try:
                     break
                 r.acceptLoans(loan['id'])
                 r.new_loans[k].update(score = accepted, message = 'accepted')
+        for loan in r.new_loans:
             r.logging(loan['id'], loan['cur'], loan['amount'], loan['available'], loan['term'], loan['score'], loan['message'])
         success = len([loan['id'] for loan in r.new_loans if loan['score'] != fail])
         basket = len([loan['id'] for loan in r.new_loans if loan['score'] == accepted])
