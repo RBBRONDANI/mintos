@@ -53,15 +53,17 @@ class MI:
     def getNewLoans(self):
         ld = self.data['loandef']['value']
         query = {
-            'min_interest':   ld['ratemin'] * 100,
-            'max_interest':   ld['ratemax'] * 100,
-            'min_term':       0,
-            'max_term':       ld['termmax'],
-            'currencies[]':   978,
-            'sort_field':     'id',
-            'sort_order':     'DESC',
-            'max_results':    100,
-            'page':           1
+            'min_interest':             '{0:.1f}'.format(ld['ratemin'] * 100),
+            'max_interest':             '{0:.1f}'.format(ld['ratemax'] * 100),
+            'min_term':                 0,
+            'max_term':                 '{0:.0f}'.format(ld['termmax'] / 30),   # in months and rounded
+            'currencies[]':             978,
+            'sort_field':               'id',
+            'sort_order':               'DESC',
+            'max_results':              100,
+            'page':                     1,
+            'lender_groups[]':          6,      # only DEBIFO
+            'risk_categories[]':        1       # and only AA rated yet
         }
         self.browser.get(self.host + "/available-loans/primary-market/?" + urlencode(query))
         self.getElement(By.ID, 'primary-market-table')
