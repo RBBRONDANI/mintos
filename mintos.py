@@ -61,9 +61,7 @@ class MI:
             'sort_field':               'id',
             'sort_order':               'DESC',
             'max_results':              100,
-            'page':                     1,
-            'lender_groups[]':          6,      # only DEBIFO
-            'risk_categories[]':        1       # and only AA rated yet
+            'page':                     1
         }
         self.browser.get(self.host + "/available-loans/primary-market/?" + urlencode(query))
         self.getElement(By.ID, 'primary-market-table')
