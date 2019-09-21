@@ -1,12 +1,15 @@
-# python3 and packages
-sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-sudo yum -y install python36u
-sudo yum -y install python36u-pip python36u-devel
-sudo pip3.6 install requests bs4 selenium psutil
-download and unzip https://sites.google.com/a/chromium.org/chromedriver/home
-cp chromedriver /usr/local/bin/chromedriver
-sudo chmod o+w /usr/lib/python3.6/site-packages/tldextract
-sudo yum install chromium
+# sudo yum -y install python36 python36-devel
+# sudo pip3.6 install -r .requirements
+
+requests
+bs4
+selenium
+psutil
+
+# download and unzip https://sites.google.com/a/chromium.org/chromedriver/home
+# cp chromedriver /usr/local/bin/chromedriver
+# sudo chmod o+w /usr/lib/python3.6/site-packages/tldextract
+# sudo yum install chromium
 # environment variables
-export MINTOS_USER=mintosuser
-export MINTOS_PASS=secret
+# export MINTOS_USER=user
+# export MINTOS_PASS=secret
