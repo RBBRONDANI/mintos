@@ -15,7 +15,7 @@ class Runner(MI):
         self.h = h
         self.data = dict()
         for var in ['status', 'loandef']:
-            self.data.update({var: {'file': 'dat/{}.dat'.format(var), 'value': ''}})
+            self.data.update({var: {'file': 'dat/{}.json'.format(var), 'value': ''}})
             self.data_load(var)
         self.lock()
         self.loan_last = self.data["status"]["value"]["last"]
