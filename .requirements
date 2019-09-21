@@ -1,4 +1,4 @@
-# sudo yum -y install python36 python36-devel
+# sudo yum -y install python36 python36-devel chromium
 # sudo pip3.6 install -r .requirements
 
 requests
@@ -6,10 +6,9 @@ bs4
 selenium
 psutil
 
-# download and unzip https://sites.google.com/a/chromium.org/chromedriver/home
-# cp chromedriver /usr/local/bin/chromedriver
+# curl -O https://sites.google.com/a/chromium.org/chromedriver/home
+# unzip chromedriver.zip
+# sudo cp chromedriver /usr/local/bin/chromedriver
 # sudo chmod o+w /usr/lib/python3.6/site-packages/tldextract
-# sudo yum install chromium
-# environment variables
 # export MINTOS_USER=user
 # export MINTOS_PASS=secret
