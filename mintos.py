@@ -27,11 +27,8 @@ class MI:
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         self.browser = webdriver.Chrome(chrome_options = options)
-        self.browser.get(self.host + "/")
+        self.browser.get(self.host + "/login")
         self.wait = WebDriverWait(self.browser, timeout = 10) # seconds
-        account = self.getElement(By.NAME, 'MyAccountButton')
-        account.click()
-        time.sleep(1) # workaround: javascript needs to be loaded
         username = self.getElement(By.NAME, '_username')
         username.send_keys(self.user)
         password = self.browser.find_element_by_name('_password')

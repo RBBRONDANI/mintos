@@ -1,6 +1,6 @@
 tmp/*
 *.pyc
-dat/*.dat
+dat/*.json
 log/*
 .pki
 .config
